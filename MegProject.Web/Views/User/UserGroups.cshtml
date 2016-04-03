@@ -1,0 +1,83 @@
+﻿@using MegProject.Dto.CustomDto.ViewModels
+@model IEnumerable<MegProject.Dto.DtoUserGroups>
+
+@{
+    ViewBag.Title = "UserGroups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Kullanıcı Grupları</h2>
+
+        <p>
+            @Ajax.ActionLink("Oluştur", "RegisterUserGroup", null, new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "registerModalBody" }, new { @class = "btn btn-info btn-xs", @id="btnCreate" })
+
+        </p>
+        <table class="table table-hover table-condensed">
+            <tr>
+                <th>
+                    @Html.DisplayName("Kullanıcı Grup Adı")
+                </th>
+                <th>
+                    @Html.DisplayName("Oluşturulma Tarihi")
+                </th>
+                <th>
+                    @Html.DisplayName("Güncellenme Tarihi")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifyDate)
+                    </td>
+                    <td>
+                        @Ajax.ActionLink("Düzenle", "RegisterUserGroup", new { @userGroupId = item.Id }, new AjaxOptions { AllowCache = false,InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "registerModalBody" }, new { @class = "btn btn-xs btn-warning", @id="btnEdit", @onclick = "showEditModal()" }) |
+
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+<!-- Modal -->
+<div id="userGroupModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@Resources.ResourceTR.RegisterUserGroupHeader</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <div id="registerModalBody">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.AppGlobal.ButtonClose</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var showEditModal = function () {
+        $('#userGroupModal').modal('show');
+    }
+</script>
+

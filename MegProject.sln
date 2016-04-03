@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Data", "MegProject.Data\MegProject.Data.csproj", "{19C82D07-79DD-4838-99CF-E9F13FF29735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Web", "MegProject.Web\MegProject.Web.csproj", "{395D08C8-B772-4D2E-8DB2-F4D512081620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Dto", "MegProject.Dto\MegProject.Dto.csproj", "{426D5A6D-B1E7-476A-86FA-B597BDB7723D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MegProject.Business", "MegProject.Business", "{A63ACAF8-3308-4155-80D3-45E6FAFDDD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Business.Core", "MegProject.Business.Core\MegProject.Business.Core.csproj", "{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Common", "MegProject.Common\MegProject.Common.csproj", "{3F8BC361-B768-4D4E-A110-F52766D6B228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Business.Manager", "MegProject.Business.Manager\MegProject.Business.Manager.csproj", "{79D868B3-51E7-47BA-96B3-795AABFDF269}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19C82D07-79DD-4838-99CF-E9F13FF29735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C82D07-79DD-4838-99CF-E9F13FF29735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C82D07-79DD-4838-99CF-E9F13FF29735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C82D07-79DD-4838-99CF-E9F13FF29735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395D08C8-B772-4D2E-8DB2-F4D512081620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395D08C8-B772-4D2E-8DB2-F4D512081620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395D08C8-B772-4D2E-8DB2-F4D512081620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395D08C8-B772-4D2E-8DB2-F4D512081620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426D5A6D-B1E7-476A-86FA-B597BDB7723D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426D5A6D-B1E7-476A-86FA-B597BDB7723D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426D5A6D-B1E7-476A-86FA-B597BDB7723D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426D5A6D-B1E7-476A-86FA-B597BDB7723D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8BC361-B768-4D4E-A110-F52766D6B228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8BC361-B768-4D4E-A110-F52766D6B228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8BC361-B768-4D4E-A110-F52766D6B228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8BC361-B768-4D4E-A110-F52766D6B228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D4C36FE6-DB7F-4B20-9922-F71600B3EDB2} = {A63ACAF8-3308-4155-80D3-45E6FAFDDD94}
+		{79D868B3-51E7-47BA-96B3-795AABFDF269} = {A63ACAF8-3308-4155-80D3-45E6FAFDDD94}
+	EndGlobalSection
+EndGlobal
