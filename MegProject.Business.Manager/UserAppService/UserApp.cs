@@ -11,6 +11,7 @@ using MegProject.Data;
 using MegProject.Data.Repositories.UserRoles;
 using log4net;
 using System;
+using System.Threading.Tasks;
 
 namespace MegProject.Business.Manager.UserAppService
 {
@@ -33,7 +34,6 @@ namespace MegProject.Business.Manager.UserAppService
         /// <returns></returns>
         public System.Collections.Generic.List<Dto.DtoUsers> GetAllUsers()
         {
-            
            
             var result = _userRepository.GetAll();            
             return Mapper.Map<List<DtoUsers>>(result);
@@ -198,6 +198,14 @@ namespace MegProject.Business.Manager.UserAppService
             _userRepository.Update(deleteUser);
             _userRepository.Save();
             return true;
+        }
+
+
+        public List<DtoUsers> GetAllUsersAsync()
+        {
+            var usersAsync= _userRepository.GetAllAsync();
+            var users = usersAsync.Result;
+            return Mapper.Map<List<DtoUsers>>(users);
         }
     }
 }

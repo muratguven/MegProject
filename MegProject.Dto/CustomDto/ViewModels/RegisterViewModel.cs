@@ -10,6 +10,10 @@ namespace MegProject.Dto.CustomDto.ViewModels
     public class RegisterViewModel
     {
         [DataMember]
+        [ScaffoldColumn(false)]
+        public int Id { get; set; }
+
+        [DataMember]
         [DataType(DataType.EmailAddress,ErrorMessage = "Lütfen geçerli bir email adresi giriniz")]
         [Required(ErrorMessage = "Boş Bırakılamaz!")]
         [Display(Name = "Email")]

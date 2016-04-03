@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MegProject.Business.Core;
 using MegProject.Dto;
 
@@ -47,5 +48,11 @@ namespace MegProject.Business.Manager.UserAppService
         /// <param name="Id"></param>
         /// <returns></returns>
         bool DeleteUser(int? Id);
+
+        /// <summary>
+        /// Asenkron olarak Tüm Kullanıcıları getirir.
+        /// </summary>
+        /// <returns></returns>
+        List<DtoUsers> GetAllUsersAsync();
     }
 }

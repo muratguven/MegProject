@@ -128,6 +128,11 @@ namespace MegProject.Data.Core
         }
 
 
+        public async Task<IQueryable<T>> GetAllAsync()
+        {
+            return ObjectDbset.ToList().AsQueryable();
+        }
+
 
 
         #region Data Table 

@@ -314,6 +314,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\RegisterUserGroup.cshtml" />
     <Content Include="Views\User\UserGroups.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

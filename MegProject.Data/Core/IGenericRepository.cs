@@ -109,6 +109,11 @@ namespace MegProject.Data.Core
         /// <param name="entity"></param>
         /// <returns></returns>
         bool IsInDb(System.Linq.Expressions.Expression<Func<T, bool>> where);
+        /// <summary>
+        /// Asenkron Tüm dataları getirmeye yarar.
+        /// </summary>
+        /// <returns></returns>
+        Task<IQueryable<T>> GetAllAsync();
 
 
     }
