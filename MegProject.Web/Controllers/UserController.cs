@@ -42,7 +42,11 @@ namespace MegProject.Web.Controllers
             RegisterViewModel model = new RegisterViewModel();
             if (userId > 0)
             {
-
+                var user = _userApp.GetUser(userId);
+                if (user != null)
+                {
+                    model = Mapper.Map<RegisterViewModel>(user);
+                }
             }
 
             return View(model);
@@ -137,6 +141,31 @@ namespace MegProject.Web.Controllers
 
         public JsonResult CreateOrUpdateUser(RegisterViewModel user)
         {
+            if (user != null)
+            {
+                if (user.Password == user.ConfirmPassword)
+                {
+                    DtoUsers dtoUser = new DtoUsers()
+                    {
+                        Email = user.Email,
+                        UserGroupId = user.UserGroupId,
+                        Password = MegProject.Common.Cryptor.EncryptString(user.Password),
+                        UserName =user.UserName,
+                        EmailConfirmed = false,
+                        CreateDate = DateTime.Now,
+                        Status = (int)Common.Constants.Status.Active
+                       
+                    };
+
+                    
+
+
+                }
+
+              
+
+
+            }
             return null;
         }
 

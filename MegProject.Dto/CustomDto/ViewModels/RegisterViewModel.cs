@@ -14,6 +14,10 @@ namespace MegProject.Dto.CustomDto.ViewModels
         public int Id { get; set; }
 
         [DataMember]
+        [ScaffoldColumn(false)]
+        public int UserGroupId { get; set; }
+
+        [DataMember]
         [DataType(DataType.EmailAddress,ErrorMessage = "Lütfen geçerli bir email adresi giriniz")]
         [Required(ErrorMessage = "Boş Bırakılamaz!")]
         [Display(Name = "Email")]

@@ -38,6 +38,7 @@ namespace MegProject.Dto
                 #region ViewModel Mapper
 
                 cfg.CreateMap<UserGroupViewModel, DtoUserGroups>();
+                cfg.CreateMap<RegisterViewModel, DtoUsers>();
 
                 #endregion
             });
