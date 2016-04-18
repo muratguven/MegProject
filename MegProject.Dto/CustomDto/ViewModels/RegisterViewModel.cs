@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using MegProject.Dto.CustomDto.ComponentModels;
 
 namespace MegProject.Dto.CustomDto.ViewModels
 {
@@ -44,6 +45,11 @@ namespace MegProject.Dto.CustomDto.ViewModels
         [DataMember]
         [Required(ErrorMessage = "Lütfen bir kullanıcı grubu seçiniz!")]
         [Display(Name = "Kullancı Grubu")]
-        public List<DtoUserGroups> UserGroup { get; set; } 
+        public List<DtoUserGroups> UserGroup { get; set; }
+        
+        [DataMember]
+        [Required(ErrorMessage = "Lütfen Kullanıcının Rolünü Seçiniz")]
+        [Display(Name = "Kullanıcı Rolü")]
+        public List<CheckBoxModel> Roles { get; set; }  
     }
 }

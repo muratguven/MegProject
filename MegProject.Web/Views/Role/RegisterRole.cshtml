@@ -1,0 +1,84 @@
+﻿@model MegProject.Dto.CustomDto.ViewModels.RoleRegisterViewModel
+
+@{
+    ViewBag.Title = "RegisterRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Rol Tanımlama Sayfası</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                   
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                    </div>
+                
+            </div>
+        <hr/>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive table-condensed">
+                    <thead>
+                    <tr>
+                        <th>@Html.LabelFor(model => model.Controllers)</th>
+                        <th>@Html.Label("Alt Sayfalar")</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ctrl in Model.Controllers)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="ControllerId" value="@ctrl.Id" id="controllerId" /> @ctrl.Name</td>
+                                <td>
+                                    <select name="Actions" id="actions" class="form-control select2" multiple="multiple">
+                                        @foreach (var action in ctrl.SystemActions.ToList())
+                                        {
+                                            <option value="@action.Id" id="optionAction">@action.Name</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-7">
+                <input type="submit" value="Kaydet" class="btn btn-primary pull-right" />
+            </div>
+        </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $("select").select2();
+        });
+    </script>
+}

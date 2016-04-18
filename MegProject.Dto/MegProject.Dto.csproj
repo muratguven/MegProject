@@ -66,9 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomDto\ComponentModels\CheckBoxModel.cs" />
     <Compile Include="CustomDto\ResultModels\WebResultModel.cs" />
     <Compile Include="CustomDto\ViewModels\LoginViewModel.cs" />
     <Compile Include="CustomDto\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="CustomDto\ViewModels\RoleRegisterViewModel.cs" />
     <Compile Include="CustomDto\ViewModels\UserGroupViewModel.cs" />
     <Compile Include="DTOGenerator.cs">
       <AutoGen>True</AutoGen>
