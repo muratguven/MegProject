@@ -238,7 +238,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\alert.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -281,6 +280,7 @@
     <Content Include="Content\bootstrapvalidator\js\language\vi_VN.js" />
     <Content Include="Content\bootstrapvalidator\js\language\zh_CN.js" />
     <Content Include="Content\bootstrapvalidator\js\language\zh_TW.js" />
+    <Content Include="Content\jquery-confirm.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="favicon.ico" />
@@ -346,6 +346,7 @@
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-confirm.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

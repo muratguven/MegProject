@@ -55,20 +55,20 @@ var submitRoleForm = function () {
     // alert(JSON.stringify(param));
     $.ajax({
         type: 'post',
-        url: submitUrl, //TODO: Url için role action ve controller eklenecek 
+        headers: { "__RequestVerificationToken": $('[name=__RequestVerificationToken]').val() },
+        url: submitUrl, 
         contentType: 'application/json; utf-8;',
         dataType: 'json',
         data: JSON.stringify(param)
     }).done(function (data) {
-        $.alert(data.message, {
+        $.confirm({
             title: 'Kayıt İşlemi',
-            closeTime: 3000,
-            autoClose: true,
-            withTime: true,
-            type: data.result,
-            isOnly: true,
-            onClose: function () {
-                window.location.href = "Index"
+            content:data.message,
+            autoClose: 'confirm|5000',
+            confirmButton: 'Tamam',
+            cancelButton:'Kapat',
+            confirm:function () {
+                window.location.href = "Index";
             }
         });
 

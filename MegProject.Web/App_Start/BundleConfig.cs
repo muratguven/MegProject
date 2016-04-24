@@ -62,6 +62,12 @@ namespace MegProject.Web
 
             #endregion
 
+            #region
+            bundles.Add(new StyleBundle("~/bundles/JqueryConfirmCss").Include("~/Content/jquery-confirm.css"));
+            bundles.Add(new StyleBundle("~/bundles/JqueryConfirmJs").Include("~/Scripts/jquery-confirm.js"));
+            #endregion
+
+
         }
     }
 }

@@ -7,6 +7,7 @@ using MegProject.Business.Core.ControllerActionAppService;
 using MegProject.Business.Manager.RoleAppService;
 using MegProject.Dto;
 using MegProject.Dto.CustomDto.ViewModels;
+using MegProject.Web.Auth;
 using MegProject.Web.Base;
 using Ninject;
 
@@ -36,10 +37,38 @@ namespace MegProject.Web.Controllers
                 model.Controllers = controllers;
                
             }
-
-
+            
             return View(model);
         }
-        
+
+
+        #region JsonResult Methods
+
+        [HttpPost]
+        [ValidateForgeryTokenCore]
+        public JsonResult CreateOrUpdateRole(DtoRoles role, List<DtoRoleAction> actions)
+        {
+            if (role != null && !String.IsNullOrEmpty(role.RoleName))
+            {
+                if (_roleApp.CreateOrUpdateRole(role, actions))
+                {
+                    return Json(new { result = "success", message = "Kayıt oluşturuldu." });
+                }
+                else
+                {
+                    return Json(new { result = "danger", message = "Kayıt işlemi sırasında bir hata oluştu!" });
+                }
+            }
+            else
+            {
+                return Json(new { result = "danger", message = "Rol bilgisi boş olamaz!" });
+            }
+            
+        }
+
+
+        #endregion
+
+
     }
 }
