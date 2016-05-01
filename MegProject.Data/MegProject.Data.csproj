@@ -95,6 +95,8 @@
     <Compile Include="Core\DbConfiguration.cs" />
     <Compile Include="Core\GenericRepository.cs" />
     <Compile Include="Core\IGenericRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="MegProjecDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
