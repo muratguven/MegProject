@@ -106,9 +106,23 @@ namespace MegProject.Data.Core
 
         public async Task<T> AddAsync(T entity)
         {
-            ObjectDbset.Add(entity);
-            await Context.SaveChangesAsync();
-            return entity;
+            using (var scope = Context.Database.BeginTransaction())
+            {
+                try
+                {
+                    ObjectDbset.Add(entity);
+                    await Context.SaveChangesAsync();
+                    scope.Commit();
+                    return entity;
+                }
+                catch (Exception)
+                {
+                    scope.Rollback();
+                    return null;
+                }
+                
+            }
+            
         }
 
         public async Task<T> UpdateAsync(T entity)
@@ -193,17 +207,38 @@ namespace MegProject.Data.Core
         // Save All
         public int Save()
         {
-            return Context.SaveChanges();
+            using (var transaction = Context.Database.BeginTransaction())
+            {
+                try
+                {
+                    int result = Context.SaveChanges();
+                    transaction.Commit();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return 0;
+                }
+                
+
+            }
+                
         }
 
 
         public void SaveAll(List<T> entityList)
         {
-            foreach (var item in entityList)
+            using (var scope = Context.Database.BeginTransaction())
             {
-                ObjectDbset.Add(item);
-                Save();
+                foreach (var item in entityList)
+                {
+                    ObjectDbset.Add(item);
+                    Save();
+                }
+                scope.Commit();
             }
+            
             
         }
 

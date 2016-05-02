@@ -22,10 +22,10 @@ namespace MegProject.Web.Controllers
         public IControllerActionApp _controllerActionApp { private get; set; }
         
         // GET: Role
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public ActionResult RegisterRole(int roleId=0)
         {
