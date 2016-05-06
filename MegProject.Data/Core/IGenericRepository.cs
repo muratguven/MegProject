@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace MegProject.Data.Core
@@ -13,8 +14,12 @@ namespace MegProject.Data.Core
         /// <summary>
         /// Context bilgisi
         /// </summary>
-        MegProjectDbEntities context { get; set; }
+        DbContext Context { get; set; }
         /// <summary>
+        /// DbSet bilgisi 
+        /// </summary>
+        DbSet<T> ObjectDbset { get; set; }
+            /// <summary>
         /// Tüm entity listesini getirir.
         /// </summary>
         /// <returns></returns>

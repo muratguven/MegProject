@@ -21,17 +21,15 @@ namespace MegProject.Data.Core
         //    set { ObjectDbset = value; }
         //    get { return ObjectDbset; }
         //}
+        
+        public DbContext Context { get; set; }
+        public DbSet<T> ObjectDbset { get; set; }
 
-     
-
-        private DbContext Context;
-        private DbSet<T> ObjectDbset;
-
-        public MegProjectDbEntities context
-        {
-            get { return context; }
-            set { context = new MegProjectDbEntities(); }
-        }
+        //public DbContext context
+        //{
+        //    get { return this.Context; }
+        //    set { context = new MegProjectDbEntities(); }
+        //}
 
         protected GenericRepository()
         {
@@ -43,7 +41,10 @@ namespace MegProject.Data.Core
         protected GenericRepository(DbContext context)
         {
             Context = context;
+            ObjectDbset = Context.Set<T>();
         }
+
+     
 
         public IQueryable<T> GetAll()
         {
