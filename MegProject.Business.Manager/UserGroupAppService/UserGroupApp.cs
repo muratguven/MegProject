@@ -6,6 +6,8 @@ using MegProject.Data.Repositories.UserGroup;
 using MegProject.Dto;
 using MegProject.Business.Core;
 using MegProject.Common;
+using MegProject.Data.Core;
+using Ninject;
 
 namespace MegProject.Business.Manager.UserGroupAppService
 {
@@ -13,6 +15,9 @@ namespace MegProject.Business.Manager.UserGroupAppService
     {
 
         private readonly IUserGroupRepository _userGroupRepository;
+
+        [Inject]
+        public IUnitOfWork _unitOfWork { private get; set; }
 
         //Constructor
         public UserGroupApp(IUserGroupRepository userGroupRepository)
@@ -56,9 +61,8 @@ namespace MegProject.Business.Manager.UserGroupAppService
                     modifyData.UserGroupName = userGroup.UserGroupName;
                     modifyData.Status = userGroup.Status;
                     modifyData.ModifyDate = DateTime.Now;
-
-                    _userGroupRepository.Update(modifyData);
-                    _userGroupRepository.Save();
+                    
+                    _userGroupRepository.UpdateAsync(modifyData);                    
                     log.Info("Usergroup güncellendi.");
                     return true;
                 }
@@ -68,9 +72,9 @@ namespace MegProject.Business.Manager.UserGroupAppService
                 #region Create
                 var usergroup = Mapper.Map<UserGroups>(userGroup);
 
-                usergroup.CreateDate = DateTime.Now;
-                _userGroupRepository.Add(usergroup);
-                _userGroupRepository.Save();
+                usergroup.CreateDate = DateTime.Now;        
+                _userGroupRepository.AddAsync(usergroup);
+               // _userGroupRepository.Save();
                 log.Info("Yeni UserGroup Oluşturuldu.");
                 return true;
                 #endregion

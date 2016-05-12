@@ -16,20 +16,11 @@ namespace MegProject.Data.Core
     {
         private bool disposed = false;
 
-        //private DbSet<T> ObjectDbset
-        //{
-        //    set { ObjectDbset = value; }
-        //    get { return ObjectDbset; }
-        //}
-        
+     
         public DbContext Context { get; set; }
         public DbSet<T> ObjectDbset { get; set; }
 
-        //public DbContext context
-        //{
-        //    get { return this.Context; }
-        //    set { context = new MegProjectDbEntities(); }
-        //}
+    
 
         protected GenericRepository()
         {

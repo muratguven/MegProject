@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Transactions;
 using MegProject.Data.Repositories.RoleAction;
 using MegProject.Data.Repositories.Roles;
@@ -13,13 +14,26 @@ namespace MegProject.Data.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly MegProjectDbEntities _context;
+        private readonly DbContext _context;
+        public DbContext Context
+        {
+            get
+            {
+                return _context;
+            }
+        }
 
-        public UnitOfWork(MegProjectDbEntities context)
+        public UnitOfWork()
+        {
+            _context = new MegProjectDbEntities();
+        }
+
+        public UnitOfWork(DbContext context)
         {
             _context = context;
 
         }
+
 
         public IUserRepository UserRepository { get; private set; }
         public IUserRolesRepository UserRolesRepository { get; private set; }
@@ -30,11 +44,13 @@ namespace MegProject.Data.Core
         public IRolesRepository RolesRepository { get; private set; }
         public IRoleActionRepository RoleActionRepository { get; private set; }
 
+      
+
         public int Commit()
         {
             using (TransactionScope tcx = new TransactionScope())
             {
-               return  _context.SaveChanges();
+               return  Context.SaveChanges();
             }
         }
 
@@ -44,7 +60,7 @@ namespace MegProject.Data.Core
         {
             if (disposing)
             {
-                _context.Dispose(); 
+                Context.Dispose(); 
             }
             
         }

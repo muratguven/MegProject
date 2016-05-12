@@ -2,6 +2,7 @@ using MegProject.Business.Core.ControllerActionAppService;
 using MegProject.Business.Manager.RoleAppService;
 using MegProject.Business.Manager.UserAppService;
 using MegProject.Business.Manager.UserGroupAppService;
+using MegProject.Data.Core;
 using MegProject.Data.Repositories.RoleAction;
 using MegProject.Data.Repositories.Roles;
 using MegProject.Data.Repositories.SystemActions;
@@ -74,9 +75,8 @@ namespace MegProject.Business.Manager.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            //kernel.Bind(typeof(IGenericRepository<>)).To(typeof(GenericRepository<>));
-            //kernel.Bind(typeof (IApplicationCore)).To(typeof (ApplicationCore));
-            // Generic Bind iþlemi bulunanacak !!!!!!!!!!!!!!!!!!!!!!!!!!
+            //Unit Of Work 
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 
             //User Repository and App Injection
             kernel.Bind<IUserRepository>().To<UserRepository>();
