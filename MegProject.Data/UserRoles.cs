@@ -20,5 +20,6 @@ namespace MegProject.Data
     
         public virtual Roles Roles { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }

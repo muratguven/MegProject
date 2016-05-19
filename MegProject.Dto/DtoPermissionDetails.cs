@@ -15,21 +15,29 @@ namespace MegProject.Dto
     using System.Runtime.Serialization;
     [DataContract]
     [Serializable]
-    public class DtoUserRoles
+    public class DtoPermissionDetails
     {
     
     	[DataMember]
         public int Id { get; set; }
     	[DataMember]
-        public int UserId { get; set; }
+        public int PermissionId { get; set; }
     	[DataMember]
-        public int RoleId { get; set; }
+        public int ControllerId { get; set; }
+    	[DataMember]
+        public int ActionId { get; set; }
+    	[DataMember]
+        public int Status { get; set; }
+    	[DataMember]
+        public Nullable<System.DateTime> CreateDate { get; set; }
+    	[DataMember]
+        public Nullable<int> CreatorId { get; set; }
     
     	[DataMember]
-        public  DtoRoles Roles { get; set; }
-    	[DataMember]
-        public  DtoUsers Users { get; set; }
-    	[DataMember]
         public  DtoPermission Permission { get; set; }
+    	[DataMember]
+        public  DtoSystemActions SystemActions { get; set; }
+    	[DataMember]
+        public  DtoSystemControllers SystemControllers { get; set; }
     }
 }

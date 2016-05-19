@@ -5,24 +5,45 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MegProjectDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="RoleAction">
+        <EntityType Name="Permission">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PermissionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionId" Type="int" Nullable="false" />
           <Property Name="ControllerId" Type="int" Nullable="false" />
           <Property Name="ActionId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreatorId" Type="int" />
         </EntityType>
+        <EntityType Name="RolePermissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PermissionId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifyDate" Type="datetime" />
@@ -96,39 +117,63 @@
           <Property Name="LockoutEndDateUtc" Type="datetime" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK_RoleAction_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
+        <Association Name="FK_PermissionDetails_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="PermissionDetails" Type="Self.PermissionDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Roles">
+            <Principal Role="Permission">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RoleAction">
-              <PropertyRef Name="RoleId" />
+            <Dependent Role="PermissionDetails">
+              <PropertyRef Name="PermissionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RoleAction_SystemActions">
           <End Role="SystemActions" Type="Self.SystemActions" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
+          <End Role="PermissionDetails" Type="Self.PermissionDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SystemActions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RoleAction">
+            <Dependent Role="PermissionDetails">
               <PropertyRef Name="ActionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RoleAction_SystemControllers">
           <End Role="SystemControllers" Type="Self.SystemControllers" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
+          <End Role="PermissionDetails" Type="Self.PermissionDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SystemControllers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RoleAction">
+            <Dependent Role="PermissionDetails">
               <PropertyRef Name="ControllerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -157,10 +202,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserRoles_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Roles">
+            <Principal Role="Permission">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserRoles">
@@ -193,7 +238,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MegProjectDbModelStoreContainer">
-          <EntitySet Name="RoleAction" EntityType="Self.RoleAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermissionDetails" EntityType="Self.PermissionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemActions" EntityType="Self.SystemActions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemControllers" EntityType="Self.SystemControllers" Schema="dbo" store:Type="Tables" />
@@ -201,17 +248,25 @@
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_RoleAction_Roles" Association="Self.FK_RoleAction_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
+          <AssociationSet Name="FK_PermissionDetails_Permission" Association="Self.FK_PermissionDetails_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_RoleAction_SystemActions" Association="Self.FK_RoleAction_SystemActions">
             <End Role="SystemActions" EntitySet="SystemActions" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_RoleAction_SystemControllers" Association="Self.FK_RoleAction_SystemControllers">
             <End Role="SystemControllers" EntitySet="SystemControllers" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permission" Association="Self.FK_RolePermissions_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="Self.FK_RolePermissions_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
           </AssociationSet>
           <AssociationSet Name="FK_SystemActions_SystemControllers" Association="Self.FK_SystemActions_SystemControllers">
             <End Role="SystemControllers" EntitySet="SystemControllers" />
@@ -222,7 +277,7 @@
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
-            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Permission" EntitySet="Permission" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
@@ -238,32 +293,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MegProjectDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="RoleAction">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <Property Name="ControllerId" Type="Int32" Nullable="false" />
-          <Property Name="ActionId" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatorId" Type="Int32" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_RoleAction_Roles" FromRole="RoleAction" ToRole="Roles" />
-          <NavigationProperty Name="SystemActions" Relationship="Self.FK_RoleAction_SystemActions" FromRole="RoleAction" ToRole="SystemActions" />
-          <NavigationProperty Name="SystemControllers" Relationship="Self.FK_RoleAction_SystemControllers" FromRole="RoleAction" ToRole="SystemControllers" />
-        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RoleAction" Relationship="Self.FK_RoleAction_Roles" FromRole="Roles" ToRole="RoleAction" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_Roles" FromRole="Roles" ToRole="UserRoles" />
+          <NavigationProperty Name="RolePermissions" Relationship="MegProjectDbModel.FK_RolePermissions_Roles" FromRole="Roles" ToRole="RolePermissions" />
         </EntityType>
         <EntityType Name="SystemActions">
           <Key>
@@ -274,8 +314,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RoleAction" Relationship="Self.FK_RoleAction_SystemActions" FromRole="SystemActions" ToRole="RoleAction" />
           <NavigationProperty Name="SystemControllers" Relationship="Self.FK_SystemActions_SystemControllers" FromRole="SystemActions" ToRole="SystemControllers" />
+          <NavigationProperty Name="PermissionDetails" Relationship="MegProjectDbModel.FK_RoleAction_SystemActions1" FromRole="SystemActions" ToRole="PermissionDetails" />
         </EntityType>
         <EntityType Name="SystemControllers">
           <Key>
@@ -285,8 +325,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RoleAction" Relationship="Self.FK_RoleAction_SystemControllers" FromRole="SystemControllers" ToRole="RoleAction" />
           <NavigationProperty Name="SystemActions" Relationship="Self.FK_SystemActions_SystemControllers" FromRole="SystemControllers" ToRole="SystemActions" />
+          <NavigationProperty Name="PermissionDetails" Relationship="MegProjectDbModel.FK_RoleAction_SystemControllers1" FromRole="SystemControllers" ToRole="PermissionDetails" />
         </EntityType>
         <EntityType Name="UserGroups">
           <Key>
@@ -323,6 +363,7 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_UserRoles_Roles" FromRole="UserRoles" ToRole="Roles" />
           <NavigationProperty Name="Users" Relationship="Self.FK_UserRoles_Users" FromRole="UserRoles" ToRole="Users" />
+          <NavigationProperty Name="Permission" Relationship="MegProjectDbModel.FK_UserRoles_Roles1" FromRole="UserRoles" ToRole="Permission" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -345,42 +386,6 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_RoleAction_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleAction">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RoleAction_SystemActions">
-          <End Role="SystemActions" Type="Self.SystemActions" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SystemActions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleAction">
-              <PropertyRef Name="ActionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RoleAction_SystemControllers">
-          <End Role="SystemControllers" Type="Self.SystemControllers" Multiplicity="1" />
-          <End Role="RoleAction" Type="Self.RoleAction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SystemControllers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleAction">
-              <PropertyRef Name="ControllerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserRoles_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
@@ -442,7 +447,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MegProjectDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="RoleAction" EntityType="Self.RoleAction" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="SystemActions" EntityType="Self.SystemActions" />
           <EntitySet Name="SystemControllers" EntityType="Self.SystemControllers" />
@@ -450,18 +454,6 @@
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_RoleAction_Roles" Association="Self.FK_RoleAction_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleAction_SystemActions" Association="Self.FK_RoleAction_SystemActions">
-            <End Role="SystemActions" EntitySet="SystemActions" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleAction_SystemControllers" Association="Self.FK_RoleAction_SystemControllers">
-            <End Role="SystemControllers" EntitySet="SystemControllers" />
-            <End Role="RoleAction" EntitySet="RoleAction" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
@@ -482,26 +474,153 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
+          <EntitySet Name="Permission" EntityType="MegProjectDbModel.Permission" />
+          <EntitySet Name="PermissionDetails" EntityType="MegProjectDbModel.PermissionDetails" />
+          <EntitySet Name="RolePermissions" EntityType="MegProjectDbModel.RolePermissions" />
+          <AssociationSet Name="FK_PermissionDetails_Permission" Association="MegProjectDbModel.FK_PermissionDetails_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permission" Association="MegProjectDbModel.FK_RolePermissions_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles1" Association="MegProjectDbModel.FK_UserRoles_Roles1">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleAction_SystemActions1" Association="MegProjectDbModel.FK_RoleAction_SystemActions1">
+            <End Role="SystemActions" EntitySet="SystemActions" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleAction_SystemControllers1" Association="MegProjectDbModel.FK_RoleAction_SystemControllers1">
+            <End Role="SystemControllers" EntitySet="SystemControllers" />
+            <End Role="PermissionDetails" EntitySet="PermissionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="MegProjectDbModel.FK_RolePermissions_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PermissionDetails" Relationship="MegProjectDbModel.FK_PermissionDetails_Permission" FromRole="Permission" ToRole="PermissionDetails" />
+          <NavigationProperty Name="RolePermissions" Relationship="MegProjectDbModel.FK_RolePermissions_Permission" FromRole="Permission" ToRole="RolePermissions" />
+          <NavigationProperty Name="UserRoles" Relationship="MegProjectDbModel.FK_UserRoles_Roles1" FromRole="Permission" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="PermissionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+          <Property Name="ControllerId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatorId" Type="Int32" />
+          <NavigationProperty Name="Permission" Relationship="MegProjectDbModel.FK_PermissionDetails_Permission" FromRole="PermissionDetails" ToRole="Permission" />
+          <NavigationProperty Name="SystemActions" Relationship="MegProjectDbModel.FK_RoleAction_SystemActions1" FromRole="PermissionDetails" ToRole="SystemActions" />
+          <NavigationProperty Name="SystemControllers" Relationship="MegProjectDbModel.FK_RoleAction_SystemControllers1" FromRole="PermissionDetails" ToRole="SystemControllers" />
+        </EntityType>
+        <EntityType Name="RolePermissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Permission" Relationship="MegProjectDbModel.FK_RolePermissions_Permission" FromRole="RolePermissions" ToRole="Permission" />
+          <NavigationProperty Name="Roles" Relationship="MegProjectDbModel.FK_RolePermissions_Roles" FromRole="RolePermissions" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_PermissionDetails_Permission">
+          <End Type="MegProjectDbModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="MegProjectDbModel.PermissionDetails" Role="PermissionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionDetails">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permission">
+          <End Type="MegProjectDbModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="MegProjectDbModel.RolePermissions" Role="RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles1">
+          <End Type="MegProjectDbModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="MegProjectDbModel.UserRoles" Role="UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleAction_SystemActions1">
+          <End Type="MegProjectDbModel.SystemActions" Role="SystemActions" Multiplicity="1" />
+          <End Type="MegProjectDbModel.PermissionDetails" Role="PermissionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemActions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionDetails">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleAction_SystemControllers1">
+          <End Type="MegProjectDbModel.SystemControllers" Role="SystemControllers" Multiplicity="1" />
+          <End Type="MegProjectDbModel.PermissionDetails" Role="PermissionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemControllers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionDetails">
+              <PropertyRef Name="ControllerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Type="MegProjectDbModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="MegProjectDbModel.RolePermissions" Role="RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MegProjectDbModelStoreContainer" CdmEntityContainer="MegProjectDbEntities">
-          <EntitySetMapping Name="RoleAction">
-            <EntityTypeMapping TypeName="MegProjectDbModel.RoleAction">
-              <MappingFragment StoreEntitySet="RoleAction">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="ControllerId" ColumnName="ControllerId" />
-                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="MegProjectDbModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
@@ -585,6 +704,42 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permission">
+            <EntityTypeMapping TypeName="MegProjectDbModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermissionDetails">
+            <EntityTypeMapping TypeName="MegProjectDbModel.PermissionDetails">
+              <MappingFragment StoreEntitySet="PermissionDetails">
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ControllerId" ColumnName="ControllerId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolePermissions">
+            <EntityTypeMapping TypeName="MegProjectDbModel.RolePermissions">
+              <MappingFragment StoreEntitySet="RolePermissions">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

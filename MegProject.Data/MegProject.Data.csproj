@@ -112,9 +112,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MegProjecDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Permission.cs">
+      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PermissionDetails.cs">
+      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\RoleAction\IRoleActionRepository.cs" />
-    <Compile Include="Repositories\RoleAction\RoleActionRepository.cs" />
+    <Compile Include="Repositories\PermissionDetails\IPermissionDetailsRepository.cs" />
+    <Compile Include="Repositories\PermissionDetails\PermissionDetailsRepository.cs" />
+    <Compile Include="Repositories\Permissions\IPermissionsRepository.cs" />
+    <Compile Include="Repositories\Permissions\PermissionsRepository.cs" />
+    <Compile Include="Repositories\RolePermissions\IRolePermissionsRepository.cs" />
+    <Compile Include="Repositories\RolePermissions\RolePermissionsRepository.cs" />
     <Compile Include="Repositories\Roles\IRolesRepository.cs" />
     <Compile Include="Repositories\Roles\RolesRepository.cs" />
     <Compile Include="Repositories\SystemActions\ISystemActionRepository.cs" />
@@ -129,7 +139,7 @@
     <Compile Include="Repositories\UserRoles\UserRolesRepository.cs" />
     <Compile Include="Repositories\Users\IUserRepository.cs" />
     <Compile Include="Repositories\Users\UserRepository.cs" />
-    <Compile Include="RoleAction.cs">
+    <Compile Include="RolePermissions.cs">
       <DependentUpon>MegProjecDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">

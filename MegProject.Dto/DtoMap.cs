@@ -33,8 +33,16 @@ namespace MegProject.Dto
                 cfg.CreateMap<SystemControllers, DtoSystemControllers>();
                 cfg.CreateMap<DtoSystemControllers, SystemControllers>();
 
-                cfg.CreateMap<RoleAction, DtoRoleAction>();
-                cfg.CreateMap<DtoRoleAction, RoleAction>();
+                cfg.CreateMap<PermissionDetails, DtoPermissionDetails>();
+                cfg.CreateMap<DtoPermissionDetails, PermissionDetails>();
+
+                cfg.CreateMap<Permission, DtoPermission>();
+                cfg.CreateMap<DtoPermission, Permission>();
+
+                cfg.CreateMap<RolePermissions, DtoRolePermissions>();
+                cfg.CreateMap<DtoRolePermissions, RolePermissions>();
+
+
                 #region ViewModel Mapper
 
                 cfg.CreateMap<UserGroupViewModel, DtoUserGroups>();

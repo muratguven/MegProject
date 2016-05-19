@@ -7,29 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MegProject.Dto
+namespace MegProject.Data
 {
     using System;
     using System.Collections.Generic;
     
-    using System.Runtime.Serialization;
-    [DataContract]
-    [Serializable]
-    public class DtoUserRoles
+    public partial class RolePermissions
     {
-    
-    	[DataMember]
         public int Id { get; set; }
-    	[DataMember]
-        public int UserId { get; set; }
-    	[DataMember]
         public int RoleId { get; set; }
+        public int PermissionId { get; set; }
+        public int Status { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> ModifyDate { get; set; }
     
-    	[DataMember]
-        public  DtoRoles Roles { get; set; }
-    	[DataMember]
-        public  DtoUsers Users { get; set; }
-    	[DataMember]
-        public  DtoPermission Permission { get; set; }
+        public virtual Permission Permission { get; set; }
+        public virtual Roles Roles { get; set; }
     }
 }

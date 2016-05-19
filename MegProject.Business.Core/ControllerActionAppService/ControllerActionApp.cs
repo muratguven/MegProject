@@ -4,7 +4,7 @@ using System.Linq;
 using AutoMapper;
 using MegProject.Business.Core;
 using MegProject.Data;
-using MegProject.Data.Repositories.RoleAction;
+using MegProject.Data.Repositories.PermissionDetails;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
 using MegProject.Dto;
@@ -19,7 +19,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
         [Inject]
         public ISystemControllerRepository _systemControllerRepository {private get; set; }
         [Inject]
-        public IRoleActionRepository _roleAction {private get; set; }
+        public IPermissionDetailsRepository _permissionDetailsRepository {private get; set; }
 
 
         public ControllerActionApp()
@@ -28,7 +28,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
             _systemActionRepository = new SystemActionRepository();
             _systemControllerRepository = new SystemControllerRepository();
-            _roleAction = new RoleActionRepository();
+            _permissionDetailsRepository = new PermissionDetailsRepository();
         }
 
 
@@ -171,11 +171,11 @@ namespace MegProject.Business.Core.ControllerActionAppService
                         _systemActionRepository.Find(x => x.ControllerId == dbController.Id && x.Name == deleteItem);
 
                     // Delete RoleAction Table
-                    var roleActions = _roleAction.FindList(x => x.ActionId == action.Id);
+                    var roleActions = _permissionDetailsRepository.FindList(x => x.ActionId == action.Id);
                     foreach (var roleactionItem in roleActions)
                     {
-                        _roleAction.Delete(roleactionItem.Id);
-                        _roleAction.Save();
+                        _permissionDetailsRepository.Delete(roleactionItem.Id);
+                        _permissionDetailsRepository.Save();
                     }
 
 
@@ -193,10 +193,10 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
 
 
-        public List<DtoRoleAction> GetSelectedRoleActions(int? roleId)
+        public List<DtoPermissionDetails> GetSelectedPermissionDetails(int? permissonId)
         {
-            var result = _roleAction.FindList(x => x.RoleId == roleId);
-            return Mapper.Map<List<DtoRoleAction>>(result);            
+            var result = _permissionDetailsRepository.FindList(x => x.PermissionId == permissonId);
+            return Mapper.Map<List<DtoPermissionDetails>>(result);            
         }
     }
 }

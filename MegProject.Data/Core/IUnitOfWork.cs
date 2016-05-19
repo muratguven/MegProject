@@ -1,5 +1,5 @@
 ﻿using System;
-using MegProject.Data.Repositories.RoleAction;
+
 using MegProject.Data.Repositories.Roles;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
@@ -19,7 +19,7 @@ namespace MegProject.Data.Core
         ISystemControllerRepository SystemControllerRepository { get; }
         ISystemActionRepository SystemActionRepository { get; }
         IRolesRepository RolesRepository { get; }
-        IRoleActionRepository RoleActionRepository { get; }
+  
         int Commit();
     }
 }

@@ -48,7 +48,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        List<DtoRoleAction> GetSelectedRoleActions(int? roleId);
+        List<DtoPermissionDetails> GetSelectedPermissionDetails(int? permissionId);
 
     }
 }

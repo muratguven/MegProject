@@ -17,7 +17,7 @@ namespace MegProject.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SystemActions()
         {
-            this.RoleAction = new HashSet<RoleAction>();
+            this.PermissionDetails = new HashSet<PermissionDetails>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace MegProject.Data
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoleAction> RoleAction { get; set; }
         public virtual SystemControllers SystemControllers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PermissionDetails> PermissionDetails { get; set; }
     }
 }

@@ -6,13 +6,16 @@ namespace MegProject.Business.Manager.RoleAppService
 {
     public interface IRoleApp:IApplicationCore
     {
+
+        #region Roles
+
         /// <summary>
         /// Kullanıcı Id nin rol adında role sahip mi değil mi sonucunu döndürür.
         /// </summary>
         /// <param name="role"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        bool IsInRole(string role,int userId);
+        bool IsInRole(string role, int userId);
 
         /// <summary>
         /// Bütün Rolleri dödürür.
@@ -38,9 +41,28 @@ namespace MegProject.Business.Manager.RoleAppService
         /// Role ve Actionlar ile role ve RoleAction kaydı oluşturur.
         /// </summary>
         /// <param name="role"></param>
-        /// <param name="actions"></param>
+        /// <param name="permissions"></param>
         /// <returns></returns>
-        bool CreateOrUpdateRole(DtoRoles role,List<DtoRoleAction> actions);
+        bool CreateOrUpdateRole(DtoRoles role, List<DtoRolePermissions> permissions);
+
+
+        /// <summary>
+        /// Role ID ye göre role Controller action  bilgilerini getirir.
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        List<DtoRolePermissions> GetRolePermissions(int roleId);
+        /// <summary>
+        /// Verilen Id ye göre rol bilgisini siler.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        bool DeleteRole(int? Id);
+
+        #endregion
+
+
+        #region Permissions
 
         /// <summary>
         /// Kullanıcının Contoller ve bağlı bulunan action izni var mı sorgusunu gerçekleştirir.
@@ -49,18 +71,24 @@ namespace MegProject.Business.Manager.RoleAppService
         /// <param name="controllerName"></param>
         /// <param name="actionName"></param>
         /// <returns></returns>
-        bool IsInControlActions(int userId, string controllerName, string actionName);
+        bool IsInPermissionDetail(int userId, string controllerName, string actionName);
+
         /// <summary>
-        /// Role ID ye göre role Controller action  bilgilerini getirir.
+        /// Yeni İzin Oluşturur veya Günceller.
         /// </summary>
-        /// <param name="roleId"></param>
+        /// <param name="permission"></param>
         /// <returns></returns>
-        List<DtoRoleAction> GetRoleAction(int roleId);
+        bool CreateOrUpdatePermission(DtoPermission permission);
+
         /// <summary>
-        /// Verilen Id ye göre rol bilgisini siler.
+        /// İzin ve İzin Detaylarını Ekler veya Günceller
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="permission"></param>
+        /// <param name="details"></param>
         /// <returns></returns>
-        bool DeleteRole(int? Id);
+        bool CreateOrUpdatePermission(DtoPermission permission, List<DtoPermissionDetails> details);
+
+        #endregion
+
     }
 }

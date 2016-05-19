@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Transactions;
-using MegProject.Data.Repositories.RoleAction;
 using MegProject.Data.Repositories.Roles;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
@@ -42,7 +41,7 @@ namespace MegProject.Data.Core
         public ISystemControllerRepository SystemControllerRepository { get; private set; }
         public ISystemActionRepository SystemActionRepository { get; private set; }
         public IRolesRepository RolesRepository { get; private set; }
-        public IRoleActionRepository RoleActionRepository { get; private set; }
+        
 
       
 

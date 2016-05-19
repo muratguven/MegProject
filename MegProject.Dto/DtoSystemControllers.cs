@@ -28,8 +28,8 @@ namespace MegProject.Dto
         public Nullable<System.DateTime> CreateDate { get; set; }
     
     	[DataMember]
-        public  ICollection<DtoRoleAction> RoleAction { get; set; }
-    	[DataMember]
         public  ICollection<DtoSystemActions> SystemActions { get; set; }
+    	[DataMember]
+        public  ICollection<DtoPermissionDetails> PermissionDetails { get; set; }
     }
 }

@@ -12,23 +12,27 @@ namespace MegProject.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class SystemControllers
+    public partial class Permission
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SystemControllers()
+        public Permission()
         {
-            this.SystemActions = new HashSet<SystemActions>();
             this.PermissionDetails = new HashSet<PermissionDetails>();
+            this.RolePermissions = new HashSet<RolePermissions>();
+            this.UserRoles = new HashSet<UserRoles>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Status { get; set; }
+        public string PermissionName { get; set; }
+        public int Status { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> ModifyDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SystemActions> SystemActions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PermissionDetails> PermissionDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RolePermissions> RolePermissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRoles> UserRoles { get; set; }
     }
 }

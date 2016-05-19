@@ -25,7 +25,6 @@ namespace MegProject.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RoleAction> RoleAction { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SystemActions> SystemActions { get; set; }
         public virtual DbSet<SystemControllers> SystemControllers { get; set; }
@@ -33,5 +32,8 @@ namespace MegProject.Data
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Permission> Permission { get; set; }
+        public virtual DbSet<PermissionDetails> PermissionDetails { get; set; }
+        public virtual DbSet<RolePermissions> RolePermissions { get; set; }
     }
 }

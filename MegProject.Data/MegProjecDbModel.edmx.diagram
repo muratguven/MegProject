@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="094343f4872f4a47b58f30c96464e84b" Name="Diagram1">
-        <EntityTypeShape EntityType="MegProjectDbModel.RoleAction" Width="1.5" PointX="13.25" PointY="9.375" IsExpanded="true" />
+      <Diagram DiagramId="094343f4872f4a47b58f30c96464e84b" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="MegProjectDbModel.Roles" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MegProjectDbModel.SystemActions" Width="1.5" PointX="11" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MegProjectDbModel.SystemControllers" Width="1.5" PointX="8.75" PointY="8.125" IsExpanded="true" />
@@ -13,14 +12,20 @@
         <EntityTypeShape EntityType="MegProjectDbModel.UserProfile" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MegProjectDbModel.UserRoles" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="MegProjectDbModel.Users" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="MegProjectDbModel.FK_RoleAction_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="MegProjectDbModel.FK_RoleAction_SystemActions" ManuallyRouted="false" />
-        <AssociationConnector Association="MegProjectDbModel.FK_RoleAction_SystemControllers" ManuallyRouted="false" />
         <AssociationConnector Association="MegProjectDbModel.FK_UserRoles_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="MegProjectDbModel.FK_SystemActions_SystemControllers" ManuallyRouted="false" />
         <AssociationConnector Association="MegProjectDbModel.FK_Users_UserGroups" ManuallyRouted="false" />
         <AssociationConnector Association="MegProjectDbModel.FK_UserProfile_Users" ManuallyRouted="false" />
         <AssociationConnector Association="MegProjectDbModel.FK_UserRoles_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MegProjectDbModel.Permission" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="MegProjectDbModel.PermissionDetails" Width="1.5" PointX="13.25" PointY="7" />
+        <EntityTypeShape EntityType="MegProjectDbModel.RolePermissions" Width="1.5" PointX="11.25" PointY="3.25" />
+        <AssociationConnector Association="MegProjectDbModel.FK_PermissionDetails_Permission" />
+        <AssociationConnector Association="MegProjectDbModel.FK_RolePermissions_Permission" />
+        <AssociationConnector Association="MegProjectDbModel.FK_UserRoles_Roles1" />
+        <AssociationConnector Association="MegProjectDbModel.FK_RoleAction_SystemActions1" />
+        <AssociationConnector Association="MegProjectDbModel.FK_RoleAction_SystemControllers1" />
+        <AssociationConnector Association="MegProjectDbModel.FK_RolePermissions_Roles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

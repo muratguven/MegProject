@@ -78,7 +78,13 @@
       <DependentUpon>DTOGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="DtoMap.cs" />
-    <Compile Include="DtoRoleAction.cs">
+    <Compile Include="DtoPermission.cs">
+      <DependentUpon>DTOGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DtoPermissionDetails.cs">
+      <DependentUpon>DTOGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DtoRolePermissions.cs">
       <DependentUpon>DTOGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="DtoRoles.cs">

@@ -7,31 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MegProject.Dto
+namespace MegProject.Data
 {
     using System;
     using System.Collections.Generic;
     
-    using System.Runtime.Serialization;
-    [DataContract]
-    [Serializable]
-    public class DtoSystemActions
+    public partial class PermissionDetails
     {
-    
-    	[DataMember]
         public int Id { get; set; }
-    	[DataMember]
-        public Nullable<int> ControllerId { get; set; }
-    	[DataMember]
-        public string Name { get; set; }
-    	[DataMember]
-        public Nullable<int> Status { get; set; }
-    	[DataMember]
+        public int PermissionId { get; set; }
+        public int ControllerId { get; set; }
+        public int ActionId { get; set; }
+        public int Status { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> CreatorId { get; set; }
     
-    	[DataMember]
-        public  DtoSystemControllers SystemControllers { get; set; }
-    	[DataMember]
-        public  ICollection<DtoPermissionDetails> PermissionDetails { get; set; }
+        public virtual Permission Permission { get; set; }
+        public virtual SystemActions SystemActions { get; set; }
+        public virtual SystemControllers SystemControllers { get; set; }
     }
 }
