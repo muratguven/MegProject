@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegProject.Business.Core;
+using MegProject.Data.Models;
 using MegProject.Dto;
 
 namespace MegProject.Business.Manager.UserAppService
@@ -11,7 +12,7 @@ namespace MegProject.Business.Manager.UserAppService
         /// Tüm kullanıcıları getirir.
         /// </summary>
         /// <returns></returns>
-        List<DtoUsers> GetAllUsers();
+        List<Users> GetAllUsers();
 
         /// <summary>
         /// Email ve pass e göre kullanıcı bilgisini getirir.
@@ -19,7 +20,7 @@ namespace MegProject.Business.Manager.UserAppService
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        DtoUsers GetUser(string email, string password);
+        Users GetUser(string email, string password);
 
         /// <summary>
         /// Kullanıcı ve rolleri ile yeni kullanıcı ve rol atama,güncelleme işlemlerini gerçekleştirir.
@@ -27,20 +28,20 @@ namespace MegProject.Business.Manager.UserAppService
         /// <param name="user"></param>
         /// <param name="userRoles"></param>
         /// <returns></returns>
-        bool CreateOrUpdateUser(DtoUsers user, List<DtoRoles> userRoles);
+        bool CreateOrUpdateUser(Users user, List<Roles> userRoles);
 
         /// <summary>
         /// Kullanıcı Id ye göre Kullanıcı rollerini getirir.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-       List<DtoUserRoles> GetUserRole(int userId);
+       List<UserRoles> GetUserRole(int userId);
         /// <summary>
         /// Kullanıcı Id ye göre kullanıcı bilgisini getirir.
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        DtoUsers GetUser(int? Id);
+        Users GetUser(int? Id);
 
         /// <summary>
         /// Id'e göre kullanıcı bilgisini siler. ( Status =-1)
@@ -53,6 +54,6 @@ namespace MegProject.Business.Manager.UserAppService
         /// Asenkron olarak Tüm Kullanıcıları getirir.
         /// </summary>
         /// <returns></returns>
-        List<DtoUsers> GetAllUsersAsync();
+        List<Users> GetAllUsersAsync();
     }
 }

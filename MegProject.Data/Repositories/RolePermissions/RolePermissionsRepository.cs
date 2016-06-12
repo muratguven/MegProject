@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.RolePermissions
 {
-    public class RolePermissionsRepository:GenericRepository<Data.RolePermissions>,IRolePermissionsRepository
+    public class RolePermissionsRepository:GenericRepository<Models.RolePermissions>,IRolePermissionsRepository
     {
          
     }

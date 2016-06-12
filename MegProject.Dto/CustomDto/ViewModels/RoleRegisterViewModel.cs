@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using MegProject.Data.Models;
 
 namespace MegProject.Dto.CustomDto.ViewModels
 {
@@ -15,7 +16,7 @@ namespace MegProject.Dto.CustomDto.ViewModels
          
         [DataMember]
         [Display(Name = "Ana Sayfalar")]
-         public List<DtoSystemControllers> Controllers { get; set; } 
+         public List<SystemControllers> Controllers { get; set; } 
         
         
     }

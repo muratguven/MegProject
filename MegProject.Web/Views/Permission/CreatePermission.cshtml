@@ -1,0 +1,81 @@
+﻿@model MegProject.Dto.CustomDto.ViewModels.PermissionRegisterViewModel
+
+@{
+    ViewBag.Title = "CreatePermission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreatePermission</h2>
+
+<form id="formPermission">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PermissionRegisterViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PermissionName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PermissionName, new { htmlAttributes = new { @class = "form-control", @id = "permissionname" } })
+                @Html.ValidationMessageFor(model => model.PermissionName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive table-condensed">
+                    <thead>
+                        <tr>
+                            <th>@Html.LabelFor(model => model.ControllersActions)</th>
+                            <th>@Html.Label("Alt Sayfalar")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.ControllersActions != null)
+                    {
+                        foreach (var ctrl in Model.ControllersActions)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="controllerId" value="@ctrl.Id" /> @ctrl.Name</td>
+                                <td>
+                                    <select name="Actions" id="select_@ctrl.Id" class="form-control select2" multiple="multiple">
+                                        @foreach (var action in ctrl.SystemActions.ToList())
+                                        {
+                                            <option value="@action.Id" id="optionAction">@action.Name</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        }
+                    }
+                 
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-7">
+                <input type="submit" value="Kaydet" class="btn btn-primary pull-right" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var submitUrl = "@Url.Action("CreateOrUpdatePermission", "Permission")";
+        $(function() {
+            $("select").select2();
+        });
+    </script>
+<script src="~/Scripts/PageScripts/Permissions/createpermission.js"></script>
+
+}

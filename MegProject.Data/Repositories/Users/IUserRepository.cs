@@ -7,8 +7,8 @@ using System.Linq;
 
 namespace MegProject.Data.Repositories.Users
 {
-    public interface IUserRepository:IGenericRepository<Data.Users>
+    public interface IUserRepository:IGenericRepository<Models.Users>
     {
-        DataTable GetAllObjects();
+       // DataTable GetAllObjects();
     }
 }

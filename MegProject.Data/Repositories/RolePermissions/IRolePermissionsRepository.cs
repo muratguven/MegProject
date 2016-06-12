@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.RolePermissions
 {
-    public interface IRolePermissionsRepository:IGenericRepository<Data.RolePermissions>
+    public interface IRolePermissionsRepository:IGenericRepository<Models.RolePermissions>
     {
          
     }

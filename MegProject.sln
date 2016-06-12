@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Data", "MegProject.Data\MegProject.Data.csproj", "{19C82D07-79DD-4838-99CF-E9F13FF29735}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Common", "MegProject.Common\MegProject.Common.csproj", "{3F8BC361-B768-4D4E-A110-F52766D6B228}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Business.Manager", "MegProject.Business.Manager\MegProject.Business.Manager.csproj", "{79D868B3-51E7-47BA-96B3-795AABFDF269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegProject.Test", "MegProject.Test\MegProject.Test.csproj", "{27EC5DE0-15D4-4670-ACB3-9279216803E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79D868B3-51E7-47BA-96B3-795AABFDF269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27EC5DE0-15D4-4670-ACB3-9279216803E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27EC5DE0-15D4-4670-ACB3-9279216803E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27EC5DE0-15D4-4670-ACB3-9279216803E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27EC5DE0-15D4-4670-ACB3-9279216803E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

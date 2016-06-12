@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.Permissions
 {
-    public interface IPermissionsRepository:IGenericRepository<Data.Permission>
+    public interface IPermissionsRepository:IGenericRepository<Models.Permission>
     {
          
     }

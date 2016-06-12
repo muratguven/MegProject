@@ -96,8 +96,6 @@
     <Compile Include="RoleAppService\RoleApp.cs" />
     <Compile Include="UserAppService\IUserApp.cs" />
     <Compile Include="UserAppService\UserApp.cs" />
-    <Compile Include="UserGroupAppService\IUserGroupApp.cs" />
-    <Compile Include="UserGroupAppService\UserGroupApp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

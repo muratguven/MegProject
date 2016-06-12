@@ -4,8 +4,6 @@ using System.Transactions;
 using MegProject.Data.Repositories.Roles;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
-using MegProject.Data.Repositories.UserGroup;
-using MegProject.Data.Repositories.UserProfile;
 using MegProject.Data.Repositories.UserRoles;
 using MegProject.Data.Repositories.Users;
 
@@ -24,7 +22,7 @@ namespace MegProject.Data.Core
 
         public UnitOfWork()
         {
-            _context = new MegProjectDbEntities();
+           
         }
 
         public UnitOfWork(DbContext context)
@@ -36,8 +34,6 @@ namespace MegProject.Data.Core
 
         public IUserRepository UserRepository { get; private set; }
         public IUserRolesRepository UserRolesRepository { get; private set; }
-        public IUserProfileRepository UserProfileRepository { get; private set; }
-        public IUserGroupRepository UserGroupRepository { get; private set; }
         public ISystemControllerRepository SystemControllerRepository { get; private set; }
         public ISystemActionRepository SystemActionRepository { get; private set; }
         public IRolesRepository RolesRepository { get; private set; }

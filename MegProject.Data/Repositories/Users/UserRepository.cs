@@ -5,36 +5,35 @@ using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using MegProject.Data.Core;
-
+using MegProject.Data.Models.Context;
 
 
 namespace MegProject.Data.Repositories.Users
 {
-    public class UserRepository:GenericRepository<Data.Users>,IUserRepository
+    public class UserRepository:GenericRepository<Models.Users>,IUserRepository
     {
-        
-        private MegProjectDbEntities db = new MegProjectDbEntities();
 
-        public DataTable GetAllObjects()
-        {
 
-            using (db = new MegProjectDbEntities())
-            {
-                DataTable tb = new DataTable();
-                DataSet ds = new DataSet();
+        //public DataTable GetAllObjects()
+        //{
+        //    var db = Context;
+        //    using (db)
+        //    {
+        //        DataTable tb = new DataTable();
+        //        DataSet ds = new DataSet();
                 
                 
 
-                //var a = (from u in db.Users
-                //    join t in db.UserProfile on u.Id equals t.UserId
-                //    select u);
+        //        //var a = (from u in db.Users
+        //        //    join t in db.UserProfile on u.Id equals t.UserId
+        //        //    select u);
 
-                var a = db.Users.ToList();
+        //        var a = db..Users.ToList();
 
-                return this.LinqQueryToDataTable(a);
-            }
+        //        return this.LinqQueryToDataTable(a);
+        //    }
 
             
-        }
+        //}
     }
 }

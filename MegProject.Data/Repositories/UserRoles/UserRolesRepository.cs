@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.UserRoles
 {
-    public class UserRolesRepository:GenericRepository<Data.UserRoles>,IUserRolesRepository
+    public class UserRolesRepository:GenericRepository<Models.UserRoles>,IUserRolesRepository
     {
          
     }

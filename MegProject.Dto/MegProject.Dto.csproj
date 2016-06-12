@@ -69,56 +69,16 @@
     <Compile Include="CustomDto\ComponentModels\CheckBoxModel.cs" />
     <Compile Include="CustomDto\ResultModels\WebResultModel.cs" />
     <Compile Include="CustomDto\ViewModels\LoginViewModel.cs" />
+    <Compile Include="CustomDto\ViewModels\PermissionRegisterViewModel.cs" />
     <Compile Include="CustomDto\ViewModels\RegisterViewModel.cs" />
     <Compile Include="CustomDto\ViewModels\RoleRegisterViewModel.cs" />
     <Compile Include="CustomDto\ViewModels\UserGroupViewModel.cs" />
-    <Compile Include="DTOGenerator.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
     <Compile Include="DtoMap.cs" />
-    <Compile Include="DtoPermission.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoPermissionDetails.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoRolePermissions.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoRoles.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoSystemActions.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoSystemControllers.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoUserGroups.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoUserProfile.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoUserRoles.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DtoUsers.cs">
-      <DependentUpon>DTOGenerator.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DTOGenerator.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DTOGenerator.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

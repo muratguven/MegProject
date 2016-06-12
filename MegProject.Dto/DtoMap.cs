@@ -12,43 +12,43 @@ namespace MegProject.Dto
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Users, DtoUsers>();
-                cfg.CreateMap<DtoUsers, Users>();
+                //cfg.CreateMap<Users, DtoUsers>();
+                //cfg.CreateMap<DtoUsers, Users>();
 
-                cfg.CreateMap<UserProfile, DtoUserProfile>();
-                cfg.CreateMap<DtoUserProfile, UserProfile>();
+                //cfg.CreateMap<UserProfile, DtoUserProfile>();
+                //cfg.CreateMap<DtoUserProfile, UserProfile>();
 
-                cfg.CreateMap<Roles, DtoRoles>();
-                cfg.CreateMap<DtoRoles, Roles>();
+                //cfg.CreateMap<Roles, DtoRoles>();
+                //cfg.CreateMap<DtoRoles, Roles>();
 
-                cfg.CreateMap<UserGroups, DtoUserGroups>();
-                cfg.CreateMap<DtoUserGroups, UserGroups>();
+                //cfg.CreateMap<UserGroups, DtoUserGroups>();
+                //cfg.CreateMap<DtoUserGroups, UserGroups>();
 
-                cfg.CreateMap<UserRoles, DtoUserRoles>();
-                cfg.CreateMap<DtoUserRoles, UserRoles>();
+                //cfg.CreateMap<UserRoles, DtoUserRoles>();
+                //cfg.CreateMap<DtoUserRoles, UserRoles>();
 
-                cfg.CreateMap<SystemActions, DtoSystemActions>();
-                cfg.CreateMap<DtoSystemActions, SystemActions>();
+                //cfg.CreateMap<SystemActions, DtoSystemActions>();
+                //cfg.CreateMap<DtoSystemActions, SystemActions>();
 
-                cfg.CreateMap<SystemControllers, DtoSystemControllers>();
-                cfg.CreateMap<DtoSystemControllers, SystemControllers>();
+                //cfg.CreateMap<SystemControllers, DtoSystemControllers>();
+                //cfg.CreateMap<DtoSystemControllers, SystemControllers>();
 
-                cfg.CreateMap<PermissionDetails, DtoPermissionDetails>();
-                cfg.CreateMap<DtoPermissionDetails, PermissionDetails>();
+                //cfg.CreateMap<PermissionDetails, DtoPermissionDetails>();
+                //cfg.CreateMap<DtoPermissionDetails, PermissionDetails>();
 
-                cfg.CreateMap<Permission, DtoPermission>();
-                cfg.CreateMap<DtoPermission, Permission>();
+                //cfg.CreateMap<Permission, DtoPermission>();
+                //cfg.CreateMap<DtoPermission, Permission>();
 
-                cfg.CreateMap<RolePermissions, DtoRolePermissions>();
-                cfg.CreateMap<DtoRolePermissions, RolePermissions>();
+                //cfg.CreateMap<RolePermissions, DtoRolePermissions>();
+                //cfg.CreateMap<DtoRolePermissions, RolePermissions>();
 
 
-                #region ViewModel Mapper
+                //#region ViewModel Mapper
 
-                cfg.CreateMap<UserGroupViewModel, DtoUserGroups>();
-                cfg.CreateMap<RegisterViewModel, DtoUsers>();
+                //cfg.CreateMap<UserGroupViewModel, DtoUserGroups>();
+                //cfg.CreateMap<RegisterViewModel, DtoUsers>();
 
-                #endregion
+                //#endregion
             });
 
             return config.CreateMapper();

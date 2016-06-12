@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MegProject.Business.Core;
+using MegProject.Data.Models;
 using MegProject.Dto;
 
 namespace MegProject.Business.Manager.RoleAppService
@@ -21,21 +22,21 @@ namespace MegProject.Business.Manager.RoleAppService
         /// Bütün Rolleri dödürür.
         /// </summary>
         /// <returns></returns>
-        List<DtoRoles> GetAllRoles();
+        List<Roles> GetAllRoles();
 
         /// <summary>
         /// Role ID ye göre rol bilgisini getirir.
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        DtoRoles GetRole(int? Id);
+        Roles GetRole(int? Id);
 
         /// <summary>
         /// Role bilgisi ile role oluşuturur.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        bool CreateOrUpdateRole(DtoRoles role);
+        bool CreateOrUpdateRole(Roles role);
 
         /// <summary>
         /// Role ve Actionlar ile role ve RoleAction kaydı oluşturur.
@@ -43,7 +44,7 @@ namespace MegProject.Business.Manager.RoleAppService
         /// <param name="role"></param>
         /// <param name="permissions"></param>
         /// <returns></returns>
-        bool CreateOrUpdateRole(DtoRoles role, List<DtoRolePermissions> permissions);
+        bool CreateOrUpdateRole(Roles role, List<RolePermissions> permissions);
 
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace MegProject.Business.Manager.RoleAppService
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        List<DtoRolePermissions> GetRolePermissions(int roleId);
+        List<RolePermissions> GetRolePermissions(int roleId);
         /// <summary>
         /// Verilen Id ye göre rol bilgisini siler.
         /// </summary>
@@ -78,7 +79,7 @@ namespace MegProject.Business.Manager.RoleAppService
         /// </summary>
         /// <param name="permission"></param>
         /// <returns></returns>
-        bool CreateOrUpdatePermission(DtoPermission permission);
+        bool CreateOrUpdatePermission(Permission permission);
 
         /// <summary>
         /// İzin ve İzin Detaylarını Ekler veya Günceller
@@ -86,7 +87,7 @@ namespace MegProject.Business.Manager.RoleAppService
         /// <param name="permission"></param>
         /// <param name="details"></param>
         /// <returns></returns>
-        bool CreateOrUpdatePermission(DtoPermission permission, List<DtoPermissionDetails> details);
+        bool CreateOrUpdatePermission(Permission permission, List<PermissionDetails> details);
 
         #endregion
 

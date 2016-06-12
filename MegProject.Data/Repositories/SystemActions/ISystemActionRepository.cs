@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.SystemActions
 {
-    public interface ISystemActionRepository:IGenericRepository<Data.SystemActions>
+    public interface ISystemActionRepository:IGenericRepository<Models.SystemActions>
     {
          
     }

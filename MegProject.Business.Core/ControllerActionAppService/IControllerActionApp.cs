@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MegProject.Business.Core;
+using MegProject.Data.Models;
 using MegProject.Dto;
 
 namespace MegProject.Business.Core.ControllerActionAppService
@@ -12,7 +13,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// <param name="controller"></param>
         /// <param name="actionList"></param>
         /// <returns></returns>
-        bool CreateControllerAction(DtoSystemControllers controller, List<DtoSystemActions> actionList);
+        bool CreateControllerAction(SystemControllers controller, List<SystemActions> actionList);
 
         /// <summary>
         /// İsme göre Controller Id getirir.
@@ -32,7 +33,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// Tüm Controllerları Listeler.
         /// </summary>
         /// <returns></returns>
-        List<DtoSystemControllers> GetAllControllers();
+        List<SystemControllers> GetAllControllers();
 
         /// <summary>
         /// Db de  olmayan Controller ve Action satırlarını siler.
@@ -41,14 +42,14 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// </summary>
         /// <param name="newControllers"></param>
         /// <param name="newActions"></param>
-        void ClearControllerActions(DtoSystemControllers newControllers, List<DtoSystemActions> newActions);
+        void ClearControllerActions(SystemControllers newControllers, List<SystemActions> newActions);
 
         /// <summary>
         /// role Id ye göre roleaction listesini getirir.
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        List<DtoPermissionDetails> GetSelectedPermissionDetails(int? permissionId);
+        List<PermissionDetails> GetSelectedPermissionDetails(int? permissionId);
 
     }
 }

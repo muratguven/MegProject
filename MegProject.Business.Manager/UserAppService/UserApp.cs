@@ -12,6 +12,7 @@ using MegProject.Data.Repositories.UserRoles;
 using log4net;
 using System;
 using System.Threading.Tasks;
+using MegProject.Data.Models;
 
 namespace MegProject.Business.Manager.UserAppService
 {
@@ -32,11 +33,11 @@ namespace MegProject.Business.Manager.UserAppService
         /// Tüm kullanıcıları getirir.
         /// </summary>
         /// <returns></returns>
-        public System.Collections.Generic.List<Dto.DtoUsers> GetAllUsers()
+        public System.Collections.Generic.List<Data.Models.Users> GetAllUsers()
         {
            
             var result = _userRepository.GetAll();            
-            return Mapper.Map<List<DtoUsers>>(result);
+            return result.ToList();
             
         }
 
@@ -46,11 +47,10 @@ namespace MegProject.Business.Manager.UserAppService
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public DtoUsers GetUser(string email, string password)
+        public Users GetUser(string email, string password)
         {
             var result = _userRepository.Find(x => x.Email.Contains(email) && x.Password.Contains(password));
-                        
-            return Mapper.Map<DtoUsers>(result);
+            return result;
         }
 
 
@@ -61,7 +61,7 @@ namespace MegProject.Business.Manager.UserAppService
         /// <param name="user"></param>
         /// <param name="userRoles"></param>
         /// <returns></returns>
-        public bool CreateOrUpdateUser(DtoUsers user, List<DtoRoles> userRoles)
+        public bool CreateOrUpdateUser(Users user, List<Roles> userRoles)
         {
             if (user.Id > 0)
             {
@@ -75,7 +75,7 @@ namespace MegProject.Business.Manager.UserAppService
                         //Update Users data
                         dbUser.UserName = user.UserName;
                         dbUser.Email = user.Email;
-                        dbUser.UserGroupId = user.UserGroupId;
+                        //dbUser.UserGroupId = user.UserGroupId;
                         dbUser.Password = user.Password;
 
                         _userRepository.Update(dbUser);
@@ -89,7 +89,7 @@ namespace MegProject.Business.Manager.UserAppService
                         // Add New Roles for User
                         foreach (var addItem in addUserRoles)
                         {
-                            Data.UserRoles temp = new UserRoles()
+                            Data.Models.UserRoles temp = new UserRoles()
                             {
                                 RoleId = addItem,
                                 UserId = user.Id
@@ -131,8 +131,8 @@ namespace MegProject.Business.Manager.UserAppService
                 try
                 {
                     //User Create
-                    var userEntity = Mapper.Map<Data.Users>(user);
-                    _userRepository.Add(userEntity);
+                   
+                    _userRepository.Add(user);
                     _userRepository.Save();
 
                     //UserRoleCreate
@@ -141,7 +141,7 @@ namespace MegProject.Business.Manager.UserAppService
                     {
                         UserRoles temp = new UserRoles()
                         {
-                            UserId = userEntity.Id,
+                            UserId = user.Id,
                             RoleId = item.Id
                         };
                         userRolesEntity.Add(temp);
@@ -164,24 +164,24 @@ namespace MegProject.Business.Manager.UserAppService
         }
 
         #region UserRoles
-        public List<DtoUserRoles> GetUserRole(int userId)
+        public List<UserRoles> GetUserRole(int userId)
         {
             var result = _userRolesRepository.FindList(x => x.UserId == userId&&x.Roles.Status!=-1);
 
-            return Mapper.Map<List<DtoUserRoles>>(result);
+            return result.ToList();
 
         }
 
         #endregion
 
 
-        public DtoUsers GetUser(int? Id)
+        public Users GetUser(int? Id)
         {
            if(Id!=default(int))
            {
 
                var result = _userRepository.Find(x => x.Id == Id);
-               return Mapper.Map<DtoUsers>(result);
+               return result;
 
            }
            else
@@ -201,11 +201,11 @@ namespace MegProject.Business.Manager.UserAppService
         }
 
 
-        public List<DtoUsers> GetAllUsersAsync()
+        public List<Users> GetAllUsersAsync()
         {
             var usersAsync= _userRepository.GetAllAsync();
             var users = usersAsync.Result;
-            return Mapper.Map<List<DtoUsers>>(users);
+            return users.ToList();
         }
     }
 }

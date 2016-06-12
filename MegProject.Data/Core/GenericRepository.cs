@@ -24,7 +24,7 @@ namespace MegProject.Data.Core
 
         protected GenericRepository()
         {
-            Context = new MegProjectDbEntities();
+           // Context = new MegProjectDbEntities();
             ObjectDbset = Context.Set<T>();
         }
 
@@ -199,22 +199,22 @@ namespace MegProject.Data.Core
         // Save All
         public int Save()
         {
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    int result = Context.SaveChanges();
-                    transaction.Commit();
+            //using (var transaction = Context.Database.BeginTransaction())
+            //{
+                //try
+                //{
+                   int result = Context.SaveChanges();
+                    //transaction.Commit();
                     return result;
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    return 0;
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    transaction.Rollback();
+                //    return 0;
+                //}
                 
 
-            }
+            //}
                 
         }
 

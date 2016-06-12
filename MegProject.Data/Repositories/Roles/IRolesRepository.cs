@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.Roles
 {
-    public interface IRolesRepository:IGenericRepository<Data.Roles>
+    public interface IRolesRepository:IGenericRepository<Models.Roles>
     {
          
     }

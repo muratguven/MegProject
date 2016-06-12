@@ -43,6 +43,7 @@
 /// <reference path="jquery-confirm.js" />
 /// <reference path="main.js" />
 /// <reference path="modernizr-2.8.3.js" />
+/// <reference path="pagescripts/permissions/createpermission.js" />
 /// <reference path="pagescripts/roles/addrole.js" />
 /// <reference path="pagescripts/usergroups/usergroup.js" />
 /// <reference path="respond.matchmedia.addlistener.min.js" />

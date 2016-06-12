@@ -2,7 +2,7 @@
 
 namespace MegProject.Data.Repositories.SystemControllers
 {
-    public interface ISystemControllerRepository:IGenericRepository<Data.SystemControllers>
+    public interface ISystemControllerRepository:IGenericRepository<Models.SystemControllers>
     {
          
     }

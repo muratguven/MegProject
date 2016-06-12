@@ -97,27 +97,16 @@
     <Compile Include="Core\IGenericRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
-    <Compile Include="MegProjecDbModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MegProjecDbModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MegProjecDbModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MegProjecDbModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MegProjecDbModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Permission.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PermissionDetails.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Context\MegDbContext.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PermissionDetails.cs" />
+    <Compile Include="Models\RolePermissions.cs" />
+    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\SystemActions.cs" />
+    <Compile Include="Models\SystemControllers.cs" />
+    <Compile Include="Models\UserRoles.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PermissionDetails\IPermissionDetailsRepository.cs" />
     <Compile Include="Repositories\PermissionDetails\PermissionDetailsRepository.cs" />
@@ -131,49 +120,14 @@
     <Compile Include="Repositories\SystemActions\SystemActionRepository.cs" />
     <Compile Include="Repositories\SystemControllers\ISystemControllerRepository.cs" />
     <Compile Include="Repositories\SystemControllers\SystemControllerRepository.cs" />
-    <Compile Include="Repositories\UserGroup\IUserGroupRepository.cs" />
-    <Compile Include="Repositories\UserGroup\UserGroupRepository.cs" />
-    <Compile Include="Repositories\UserProfile\IUserProfileRepository.cs" />
-    <Compile Include="Repositories\UserProfile\UserProfileRepository.cs" />
     <Compile Include="Repositories\UserRoles\IUserRolesRepository.cs" />
     <Compile Include="Repositories\UserRoles\UserRolesRepository.cs" />
     <Compile Include="Repositories\Users\IUserRepository.cs" />
     <Compile Include="Repositories\Users\UserRepository.cs" />
-    <Compile Include="RolePermissions.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Roles.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SystemActions.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SystemControllers.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserGroups.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserProfile.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserRoles.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>MegProjecDbModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
-    </None>
-    <EntityDeploy Include="MegProjecDbModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MegProjecDbModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="MegProjecDbModel.edmx.diagram">
-      <DependentUpon>MegProjecDbModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -189,18 +143,7 @@
       <Name>MegProject.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="MegProjecDbModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MegProjecDbModel.edmx</DependentUpon>
-      <LastGenOutput>MegProjecDbModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MegProjecDbModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MegProjecDbModel.edmx</DependentUpon>
-      <LastGenOutput>MegProjecDbModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

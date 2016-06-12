@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using MegProject.Business.Core;
 using MegProject.Data;
+using MegProject.Data.Models;
 using MegProject.Data.Repositories.PermissionDetails;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
@@ -38,7 +39,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// <param name="controller"></param>
         /// <param name="actionList"></param>
         /// <returns></returns>
-        public bool CreateControllerAction(DtoSystemControllers controller, List<DtoSystemActions> actionList)
+        public bool CreateControllerAction(SystemControllers controller, List<SystemActions> actionList)
         {
             #region Add new Controller --> DB
 
@@ -131,10 +132,10 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// Tüm Sayfa controller isim listesini getirir.
         /// </summary>
         /// <returns></returns>
-        public List<DtoSystemControllers> GetAllControllers()
+        public List<Data.Models.SystemControllers> GetAllControllers()
         {
             var result = _systemControllerRepository.GetAll();
-            return Mapper.Map<List<DtoSystemControllers>>(result);
+            return result.ToList();
         }
 
 
@@ -151,14 +152,14 @@ namespace MegProject.Business.Core.ControllerActionAppService
         }
 
 
-        public void ClearControllerActions(DtoSystemControllers newControllers, List<DtoSystemActions> newActions)
+        public void ClearControllerActions(Data.Models.SystemControllers newControllers, List<Data.Models.SystemActions> newActions)
         {
             // First Step Is controller in DB 
             
             
             var dbController = _systemControllerRepository.Find(x => x.Name.Contains(newControllers.Name));
             
-            var entityAction = Mapper.Map<List<SystemActions>>(newActions);
+            var entityAction = Mapper.Map<List<Data.Models.SystemActions>>(newActions);
 
             if (dbController != null)
             {
@@ -193,10 +194,10 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
 
 
-        public List<DtoPermissionDetails> GetSelectedPermissionDetails(int? permissonId)
+        public List<Data.Models.PermissionDetails> GetSelectedPermissionDetails(int? permissonId)
         {
             var result = _permissionDetailsRepository.FindList(x => x.PermissionId == permissonId);
-            return Mapper.Map<List<DtoPermissionDetails>>(result);            
+            return result.ToList();
         }
     }
 }

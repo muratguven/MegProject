@@ -42,10 +42,6 @@ namespace MegProject.Dto.CustomDto.ViewModels
         [Compare("Password", ErrorMessage = "Şifre alanları eşleşmiyor!")]
         public string ConfirmPassword { get; set; }
 
-        [DataMember]
-        [Required(ErrorMessage = "Lütfen bir kullanıcı grubu seçiniz!")]
-        [Display(Name = "Kullancı Grubu")]
-        public List<DtoUserGroups> UserGroup { get; set; }
         
         [DataMember]
         [Required(ErrorMessage = "Lütfen Kullanıcının Rolünü Seçiniz")]

@@ -1,0 +1,113 @@
+﻿$(document).ready(function () {
+
+
+
+
+    $('#formPermission').bootstrapValidator({
+
+        message: 'Değer boş olamaz!',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            RoleName: {
+                message: 'Rol Adı Boş Olamaz!',
+                validators: {
+                    notEmpty: {
+                        message: 'Boş Olamaz!'
+                    }
+                }
+            }
+        }
+
+    }).on('success.form.bv', function (e) {
+        // Prevent form submission
+        e.preventDefault();
+
+        // Get the form instance
+        var $form = $(e.target);
+
+        // Get the BootstrapValidator instance
+        var bv = $form.data('bootstrapValidator');
+
+        // Use Ajax to submit form data
+        submitRoleForm();
+    });
+
+
+
+});
+
+
+var submitRoleForm = function () {
+
+    var param = {
+        "Id": $('input[name="RoleId"]').val(),
+        "PermissionName": $('#permissionname').val(),
+        "Status": "0",
+        "actions": selectControllerActionsJson()
+    };
+
+
+    // alert(JSON.stringify( selectControllerActionsJson() ));
+    // alert(JSON.stringify(param));
+    $.ajax({
+        type: 'post',
+        headers: { "__RequestVerificationToken": $('[name=__RequestVerificationToken]').val() },
+        url: submitUrl,
+        contentType: 'application/json; utf-8;',
+        dataType: 'json',
+        data: JSON.stringify(param)
+    }).done(function (data) {
+        $.confirm({
+            title: 'Kayıt İşlemi',
+            content: data.message,
+            autoClose: 'confirm|5000',
+            confirmButton: 'Tamam',
+            cancelButton: 'Kapat',
+            confirm: function () {
+                window.location.href = "Index";
+            }
+        });
+
+    });
+
+
+}
+
+
+
+var selectControllerActionsJson = function () {
+    var jsonObject = [];
+
+    // Select CheckBox Controller Id 
+    $('input[name="controllerId"]:checked').each(function () {
+
+        var item = {};
+        //item['ControllerId'] = $(this).val();
+        var controller_Id = $(this).val();
+        $('#select_' + $(this).val()).each(function (i, selected) {
+
+
+            for (var k in $(this).val()) {
+
+                item = {};
+                item["ControllerId"] = controller_Id;
+                item["ActionId"] = $(this).val()[k];
+                item["PermissionId"] = "0";
+                item["Status"] = "0";
+                jsonObject.push(item);
+
+            }
+
+        });
+
+
+    });
+
+    return jsonObject;
+}
+
+

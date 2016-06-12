@@ -4,7 +4,6 @@ using MegProject.Business.Core.ControllerActionAppService;
 using MegProject.Business.Manager;
 using MegProject.Business.Manager.RoleAppService;
 using MegProject.Business.Manager.UserAppService;
-using MegProject.Business.Manager.UserGroupAppService;
 using MegProject.Data.Core;
 using MegProject.Data.Repositories.PermissionDetails;
 using MegProject.Data.Repositories.Permissions;
@@ -12,7 +11,6 @@ using MegProject.Data.Repositories.RolePermissions;
 using MegProject.Data.Repositories.Roles;
 using MegProject.Data.Repositories.SystemActions;
 using MegProject.Data.Repositories.SystemControllers;
-using MegProject.Data.Repositories.UserGroup;
 using MegProject.Data.Repositories.UserRoles;
 using MegProject.Data.Repositories.Users;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -90,12 +88,7 @@ namespace MegProject.Business.Manager
             //Permissions And Permission Details Repository
             kernel.Bind<IPermissionsRepository>().To<PermissionsRepository>();
             kernel.Bind<IPermissionDetailsRepository>().To<PermissionDetailsRepository>();
-
             
-            //UserGroup Repository And App
-            kernel.Bind<IUserGroupRepository>().To<UserGroupRepository>();
-            kernel.Bind<IUserGroupApp>().To<UserGroupApp>();
-
             //Roles Repository And App
             kernel.Bind<IRolesRepository>().To<RolesRepository>();
             kernel.Bind<IRolePermissionsRepository>().To<RolePermissionsRepository>();

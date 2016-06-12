@@ -5,6 +5,7 @@ using MegProject.Data.Repositories.Roles;
 using MegProject.Dto;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using MegProject.Business.Core.ControllerActionAppService;
 using MegProject.Business.Manager.UserAppService;
 using MegProject.Common;
@@ -12,6 +13,7 @@ using MegProject.Data.Repositories.PermissionDetails;
 using MegProject.Data.Repositories.Permissions;
 using MegProject.Data.Repositories.RolePermissions;
 using MegProject.Data.Repositories.Users;
+using MegProject.Data.Models;
 using Ninject;
 
 namespace MegProject.Business.Manager.RoleAppService
@@ -47,24 +49,24 @@ namespace MegProject.Business.Manager.RoleAppService
 
         }
 
-        public List<DtoRoles> GetAllRoles()
+        public List<Roles> GetAllRoles()
         {
             var result = _rolesRepository.FindList(x=>x.Status!=-1);
-            return Mapper.Map<List<DtoRoles>>(result);
+            return result.ToList();
         }
 
-        public DtoRoles GetRole(int? Id)
+        public Roles GetRole(int? Id)
         {
             var result = _rolesRepository.Find(x => x.Id == Id);
-            return Mapper.Map<DtoRoles>(result);
+            return result;
         }
 
-        public bool CreateOrUpdateRole(DtoRoles role)
+        public bool CreateOrUpdateRole(Roles role)
         {
             if (role != null)
             {
                 ///map
-                var entity = Mapper.Map<Data.Roles>(role);
+                var entity = role;
 
                 if (role.Id != default(int))
                 {
@@ -114,7 +116,7 @@ namespace MegProject.Business.Manager.RoleAppService
         }
 
 
-        public bool CreateOrUpdateRole(DtoRoles role, List<DtoRolePermissions> permissions)
+        public bool CreateOrUpdateRole(Roles role, List<RolePermissions> permissions)
         {
             if (role != null)
             {
@@ -141,7 +143,7 @@ namespace MegProject.Business.Manager.RoleAppService
                             {
                                 // Add new RoleAction
 
-                                var entityRolePermission = Mapper.Map<Data.RolePermissions>(permissionItem);
+                                var entityRolePermission = permissionItem;
                                 entityRolePermission.RoleId = role.Id;
                                 _rolePermissionRepository.AddAsync(entityRolePermission);
 
@@ -171,14 +173,14 @@ namespace MegProject.Business.Manager.RoleAppService
                     else
                     {
                         // Create Role 
-                        var roleEntity = Mapper.Map<Data.Roles>(role);
+                        var roleEntity = role;
                         roleEntity.CreateDate = DateTime.Now;
                         if (permissions != null)
                         {
-                            var rolePermissionEntityList = Mapper.Map<ICollection<Data.RolePermissions>>(permissions);
+                            var rolePermissionEntityList = permissions;
                             foreach (var item in rolePermissionEntityList)
                             {                               
-                               roleEntity.RolePermissions.Add(item);
+                               role.RolePermissions.Add(item);
                             }
                         }
                         
@@ -313,19 +315,19 @@ namespace MegProject.Business.Manager.RoleAppService
             return result;
         }
 
-        public bool CreateOrUpdatePermission(DtoPermission permission)
+        public bool CreateOrUpdatePermission(Permission permission)
         {
             try
             {
                 if (permission != null)
                 {
-                    var entity = Mapper.Map<Data.Permission>(permission);
+                   
                     if (permission.Id != default(int))
                     {
                         #region Update
 
                         
-                        _permissionRepository.UpdateAsync(entity);
+                        _permissionRepository.UpdateAsync(permission);
                         return true;
 
                         #endregion
@@ -335,7 +337,7 @@ namespace MegProject.Business.Manager.RoleAppService
                     {
                         #region Create 
 
-                        _permissionRepository.AddAsync(entity);
+                        _permissionRepository.AddAsync(permission);
                         return true;
                         #endregion
                     }
@@ -352,15 +354,15 @@ namespace MegProject.Business.Manager.RoleAppService
             }
         }
 
-        public List<DtoRolePermissions> GetRolePermissions(int roleId)
+        public List<RolePermissions> GetRolePermissions(int roleId)
         {
             var result = _rolePermissionRepository.FindList(x => x.RoleId == roleId);
 
-            return Mapper.Map<List<DtoRolePermissions>>(result);
+            return result.ToList();
         }
 
 
-        public bool CreateOrUpdatePermission(DtoPermission permission, List<DtoPermissionDetails> details)
+        public bool CreateOrUpdatePermission(Permission permission, List<PermissionDetails> details)
         {
             if (permission != null)
             {
@@ -386,11 +388,9 @@ namespace MegProject.Business.Manager.RoleAppService
                                      x.ActionId == permissionItem.ActionId);
                             if (dbRolePermission == null)
                             {
-                                // Add new RoleAction
-
-                                var entityPermissionDetail = Mapper.Map<Data.PermissionDetails>(permissionItem);
-                                entityPermissionDetail.PermissionId = permission.Id;
-                                _permissionDetailRepository.AddAsync(entityPermissionDetail);
+                                // Add new RoleAction                                
+                                permissionItem.PermissionId = permission.Id;
+                                _permissionDetailRepository.AddAsync(permissionItem);
 
                             }
 
@@ -418,19 +418,19 @@ namespace MegProject.Business.Manager.RoleAppService
                     else
                     {
                         // Create Permission 
-                        var permissionEntity = Mapper.Map<Data.Permission>(permission);
-                        permissionEntity.CreateDate = DateTime.Now;
-                        _permissionRepository.AddAsync(permissionEntity);
+                        
+                        permission.CreateDate = DateTime.Now;
+                        _permissionRepository.AddAsync(permission);
                         if (details != null)
                         {
                             //Create Role Actions
-                            var permissionDetailEntity = Mapper.Map<List<Data.PermissionDetails>>(details);
-                            foreach (var item in permissionDetailEntity)
+                           // var permissionDetailEntity = Mapper.Map<List<Data.PermissionDetails>>(details);
+                            foreach (var item in details)
                             {
-                                item.PermissionId = permissionEntity.Id;
+                                item.PermissionId = permission.Id;
                                 item.CreateDate = DateTime.Now;
                             }
-                            _permissionDetailRepository.BulkInsert(permissionDetailEntity);
+                            _permissionDetailRepository.BulkInsert(details);
                         }
 
                         log.Info("Yeni izin oluşturuldu.");

@@ -226,6 +226,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -355,6 +356,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PageScripts\Permissions\createpermission.js" />
     <Content Include="Scripts\PageScripts\Roles\addrole.js" />
     <Content Include="Scripts\PageScripts\UserGroups\usergroup.js" />
     <Content Include="Scripts\respond.js" />
@@ -406,6 +408,7 @@
     <Content Include="Views\User\UserGroups.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Role\RegisterRole.cshtml" />
+    <Content Include="Views\Permission\CreatePermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -427,6 +430,10 @@
     <ProjectReference Include="..\MegProject.Common\MegProject.Common.csproj">
       <Project>{3f8bc361-b768-4d4e-a110-f52766d6b228}</Project>
       <Name>MegProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Data\MegProject.Data.csproj">
+      <Project>{19c82d07-79dd-4838-99cf-e9f13ff29735}</Project>
+      <Name>MegProject.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\MegProject.Dto\MegProject.Dto.csproj">
       <Project>{426d5a6d-b1e7-476a-86fa-b597bdb7723d}</Project>

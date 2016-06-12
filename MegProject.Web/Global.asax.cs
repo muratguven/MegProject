@@ -10,6 +10,7 @@ using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using MegProject.Business.Core.ControllerActionAppService;
+using MegProject.Data.Models;
 using MegProject.Dto;
 using MegProject.Web.Auth;
 
@@ -68,12 +69,12 @@ namespace MegProject.Web
 
             foreach (var item in controlleractionlist.Select(x => x.Controller).Distinct())
             {
-                Dto.DtoSystemControllers controllers = new DtoSystemControllers();
+                Data.Models.SystemControllers controllers = new SystemControllers();
                 controllers.Name = item;
-                List<DtoSystemActions> actionlist = new List<DtoSystemActions>();
+                List<SystemActions> actionlist = new List<SystemActions>();
                 foreach (var actions in controlleractionlist.Where(x => x.Controller == item).ToList())
                 {
-                    DtoSystemActions temp = new DtoSystemActions()
+                    SystemActions temp = new SystemActions()
                     {
                         Name = actions.Action
                     };
