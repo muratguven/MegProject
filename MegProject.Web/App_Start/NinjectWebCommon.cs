@@ -1,7 +1,7 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegProject.Business.Manager.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MegProject.Business.Manager.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegProject.Web.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MegProject.Web.App_Start.NinjectWebCommon), "Stop")]
 
-namespace MegProject.Business.Manager.App_Start
+namespace MegProject.Web.App_Start
 {
     using System;
     using System.Web;

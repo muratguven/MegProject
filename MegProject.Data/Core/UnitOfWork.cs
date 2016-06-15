@@ -11,14 +11,7 @@ namespace MegProject.Data.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _context;
-        public DbContext Context
-        {
-            get
-            {
-                return _context;
-            }
-        }
+        public DbContext Context { get; }
 
         public UnitOfWork()
         {
@@ -27,7 +20,7 @@ namespace MegProject.Data.Core
 
         public UnitOfWork(DbContext context)
         {
-            _context = context;
+            Context = context;
 
         }
 
@@ -43,7 +36,7 @@ namespace MegProject.Data.Core
 
         public int Commit()
         {
-            using (TransactionScope tcx = new TransactionScope())
+            using (var tcx = Context.Database.BeginTransaction())
             {
                return  Context.SaveChanges();
             }
