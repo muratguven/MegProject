@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MegProject.Data.Core.ModelBase;
 
 namespace MegProject.Data.Models
 {
-    public class UserRoles
+    public class UserRoles:EntityBase
     {
         [Key]
         public int Id { get; set; }
