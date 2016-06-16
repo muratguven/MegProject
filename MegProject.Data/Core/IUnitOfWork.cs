@@ -10,13 +10,16 @@ namespace MegProject.Data.Core
 {
     public interface IUnitOfWork: IDisposable
     {
-        IUserRepository UserRepository { get; }
-        IUserRolesRepository UserRolesRepository { get; }
-      
-        ISystemControllerRepository SystemControllerRepository { get; }
-        ISystemActionRepository SystemActionRepository { get; }
-        IRolesRepository RolesRepository { get; }
-  
+        Data.Core.Base.IGenericRepository<T> GetRepository<T>() where T : class;
+
+
+        //IUserRepository UserRepository { get; }
+        //IUserRolesRepository UserRolesRepository { get; }
+
+        //ISystemControllerRepository SystemControllerRepository { get; }
+        //ISystemActionRepository SystemActionRepository { get; }
+        //IRolesRepository RolesRepository { get; }
+
         int Commit();
     }
 }

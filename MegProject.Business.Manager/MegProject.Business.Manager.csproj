@@ -101,7 +101,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MegProject.Business.Core\MegProject.Business.Core.csproj">
       <Project>{d4c36fe6-db7f-4b20-9922-f71600b3edb2}</Project>
@@ -110,6 +112,10 @@
     <ProjectReference Include="..\MegProject.Common\MegProject.Common.csproj">
       <Project>{3f8bc361-b768-4d4e-a110-f52766d6b228}</Project>
       <Name>MegProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Data.Core\MegProject.Data.Core.csproj">
+      <Project>{2f0832d4-332d-45cd-84c7-31fc50cfeec1}</Project>
+      <Name>MegProject.Data.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\MegProject.Data\MegProject.Data.csproj">
       <Project>{19c82d07-79dd-4838-99cf-e9f13ff29735}</Project>

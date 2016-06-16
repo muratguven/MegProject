@@ -10,7 +10,7 @@ using EntityFramework.BulkInsert.Extensions;
 
 namespace MegProject.Data.Core.Base
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private bool disposed = false;
 
@@ -22,12 +22,12 @@ namespace MegProject.Data.Core.Base
 
         protected GenericRepository()
         {
-            // Context = new MegProjectDbEntities();
+           
             ObjectDbset = Context.Set<T>();
         }
 
 
-        protected GenericRepository(DbContext context)
+        public GenericRepository(DbContext context)
         {
             Context = context;
             ObjectDbset = Context.Set<T>();
