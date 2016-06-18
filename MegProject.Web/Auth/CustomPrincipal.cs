@@ -34,7 +34,7 @@ namespace MegProject.Web.Auth
 
         public bool IsInRole(string role)
         {
-          return  _roleApp.IsInRole(role, _megIdentity.userModel.Id);
+            return false; //_roleApp.IsInRole(role, _megIdentity.userModel.Id);
         }
     }
 }

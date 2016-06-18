@@ -4,10 +4,9 @@ using System.Linq;
 using AutoMapper;
 using MegProject.Business.Core;
 using MegProject.Data;
+using MegProject.Data.Core;
+using MegProject.Data.Core.Base;
 using MegProject.Data.Models;
-using MegProject.Data.Repositories.PermissionDetails;
-using MegProject.Data.Repositories.SystemActions;
-using MegProject.Data.Repositories.SystemControllers;
 using MegProject.Dto;
 using Ninject;
 
@@ -15,21 +14,22 @@ namespace MegProject.Business.Core.ControllerActionAppService
 {
     public class ControllerActionApp:ApplicationCore,IControllerActionApp
     {
+
         [Inject]
-        public ISystemActionRepository _systemActionRepository { private get; set; }
+        public IUnitOfWork _unitofwork { private get; set; }
+        [Inject] 
+        public IGenericRepository<SystemControllers> _systemControllerRepository { private get; set; }
         [Inject]
-        public ISystemControllerRepository _systemControllerRepository {private get; set; }
+        public IGenericRepository<SystemActions> _systemActionRepository { private get; set; }
         [Inject]
-        public IPermissionDetailsRepository _permissionDetailsRepository {private get; set; }
+        public IGenericRepository<PermissionDetails> _permissionDetailsRepository { private get; set; }
 
 
         public ControllerActionApp()
         {
-
-
-            _systemActionRepository = new SystemActionRepository();
-            _systemControllerRepository = new SystemControllerRepository();
-            _permissionDetailsRepository = new PermissionDetailsRepository();
+            _systemControllerRepository = _unitofwork.GetRepository<SystemControllers>();
+            _systemActionRepository = _unitofwork.GetRepository<SystemActions>();
+            _permissionDetailsRepository = _unitofwork.GetRepository<PermissionDetails>();
         }
 
 

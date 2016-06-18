@@ -2,22 +2,30 @@
 using System.Data.Entity;
 using System.Security.AccessControl;
 using System.Transactions;
-using MegProject.Data.Repositories.Roles;
-using MegProject.Data.Repositories.SystemActions;
-using MegProject.Data.Repositories.SystemControllers;
-using MegProject.Data.Repositories.UserRoles;
-using MegProject.Data.Repositories.Users;
 using MegProject.Data.Core.Base;
+using MegProject.Data.Models.Context;
 
 namespace MegProject.Data.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _dbContext;
+        private DbContext _dbContext;
+        private bool disposed = false;
+
+        public DbContext Context
+        {
+            get
+            {
+                _dbContext = new MegDbContext();
+                return _dbContext;
+            }
+        }
 
         public UnitOfWork()
         {
-           //TODO: Constructor overload 
+            Database.SetInitializer<Models.Context.MegDbContext>(null);
+            
+            _dbContext = new MegDbContext();
         }
 
 
@@ -52,11 +60,14 @@ namespace MegProject.Data.Core
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (!this.disposed)
             {
-                _dbContext.Dispose(); 
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
             }
-            
+            this.disposed = true;
         }
 
         public void Dispose()

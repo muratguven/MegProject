@@ -1,3 +1,7 @@
+using MegProject.Data.Core;
+using MegProject.Data.Core.Base;
+using MegProject.Data.Core.ModelBase;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegProject.Business.Manager.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MegProject.Business.Manager.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +65,9 @@ namespace MegProject.Business.Manager.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind(typeof(IGenericRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            
         }        
     }
 }
