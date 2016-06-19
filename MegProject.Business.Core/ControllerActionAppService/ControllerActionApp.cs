@@ -7,6 +7,7 @@ using MegProject.Data;
 using MegProject.Data.Core;
 using MegProject.Data.Core.Base;
 using MegProject.Data.Models;
+using MegProject.Data.Repositories;
 using MegProject.Dto;
 using Ninject;
 
@@ -14,7 +15,8 @@ namespace MegProject.Business.Core.ControllerActionAppService
 {
     public class ControllerActionApp:ApplicationCore,IControllerActionApp
     {
-
+        [Inject]
+        public ITest _test { private get; set; }
         [Inject]
         public IUnitOfWork _unitofwork { private get; set; }
         [Inject] 
@@ -27,6 +29,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
         public ControllerActionApp()
         {
+            var t = _test;
             _systemControllerRepository = _unitofwork.GetRepository<SystemControllers>();
             _systemActionRepository = _unitofwork.GetRepository<SystemActions>();
             _permissionDetailsRepository = _unitofwork.GetRepository<PermissionDetails>();
