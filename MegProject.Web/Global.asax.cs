@@ -13,10 +13,11 @@ using MegProject.Business.Core.ControllerActionAppService;
 using MegProject.Data.Models;
 using MegProject.Dto;
 using MegProject.Web.Auth;
+using Ninject.Web.Mvc;
 
 namespace MegProject.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication :System.Web.HttpApplication
     {
         protected void Application_Start()
         {
