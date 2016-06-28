@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using MegProject.Data.Core.ModelBase;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MegProject.Data.Models
 {
-    public class Users:EntityBase
+    public class Users:IdentityUser
     {
-        public int Id { get; set; }        
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> EmailConfirmed { get; set; }
-        public int? AccessFailedCount { get; set; }
-        public bool? LockoutEnabled { get; set; }
-        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
-        public string SecurityStamp { get; set; }
-        public ICollection<UserRoles> UserRoles { get; set; } 
+        //[Key]
+        //public string Id { get; set; }
+       // public virtual ICollection<UserRoles> UserRoles { get; set; } 
     }
 }

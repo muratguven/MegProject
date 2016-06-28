@@ -15,8 +15,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 {
     public class ControllerActionApp:ApplicationCore,IControllerActionApp
     {
-        [Inject]
-        public ITest _test { private get; set; }
+      
         [Inject]
         public IUnitOfWork _unitofwork { private get; set; }
         [Inject] 
@@ -29,7 +28,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
         public ControllerActionApp()
         {
-            var t = _test;
+            _unitofwork = new UnitOfWork();
             _systemControllerRepository = _unitofwork.GetRepository<SystemControllers>();
             _systemActionRepository = _unitofwork.GetRepository<SystemActions>();
             _permissionDetailsRepository = _unitofwork.GetRepository<PermissionDetails>();

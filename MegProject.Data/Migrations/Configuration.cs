@@ -10,6 +10,7 @@ namespace MegProject.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(MegProject.Data.Models.Context.MegDbContext context)
