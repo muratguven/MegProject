@@ -1,18 +1,21 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using log4net;
+using MegProject.Data.Core;
+using Ninject;
 
 namespace MegProject.Business.Core
 {
     public abstract class ApplicationCore:IApplicationCore
     {
-         /* 
-          * 
-          * Apllication Domain genelinde yapılacak işlemler için bu kısma methodlar yazılacaktır.
-          * ?*/
+        
+        [Inject]
+        public IUnitOfWork _unitOfWork { private get; set; }
 
-       //protected ILog log { get; set; }
+        
         protected ILog log
         {
             get
@@ -31,6 +34,8 @@ namespace MegProject.Business.Core
                 return mapper;
             }
         }
+
+        
 
     }
 }

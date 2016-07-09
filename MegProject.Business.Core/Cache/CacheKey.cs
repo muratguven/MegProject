@@ -5,14 +5,14 @@
         private readonly string _generatedKey;
         
 
-        public CacheKey(string objectId)
+        public CacheKey(string key)
         {
-            _generatedKey = objectId;
+            _generatedKey = key;
         }
 
-        public static CacheKey New(string Id)
+        public static CacheKey New(string key)
         {
-            return new CacheKey(Id);
+            return new CacheKey(key);
         }
 
 

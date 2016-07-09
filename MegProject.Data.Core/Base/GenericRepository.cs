@@ -22,7 +22,7 @@ namespace MegProject.Data.Core.Base
 
         protected GenericRepository()
         {
-           
+
             ObjectDbset = Context.Set<T>();
         }
 
@@ -56,9 +56,9 @@ namespace MegProject.Data.Core.Base
         }
 
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            ObjectDbset.Add(entity);
+            return ObjectDbset.Add(entity);
         }
 
 
@@ -68,10 +68,11 @@ namespace MegProject.Data.Core.Base
             ObjectDbset.Remove(entityDelete);
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
-            ObjectDbset.Attach(entity);
+            var result = ObjectDbset.Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
+            return result;
         }
 
         public IQueryable<T> GetByPaging<TResult>(int pageNumber, int pageSize, System.Linq.Expressions.Expression<Func<T, TResult>> orderByQuery, bool isAscendingOrder, out int rowsCount)

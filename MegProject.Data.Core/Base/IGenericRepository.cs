@@ -44,7 +44,7 @@ namespace MegProject.Data.Core.Base
         ///  Entity ekleme işlemi
         /// </summary>
         /// <param name="entity"></param>
-        void Add(T entity);
+        T Add(T entity);
         /// <summary>
         /// 1-50 entity listesi için toplu ekleme işlemini yapar.
         /// </summary>
@@ -59,7 +59,7 @@ namespace MegProject.Data.Core.Base
         /// Entity güncelleme işlemini yapar.(Dikkat bu işlemler veri tabanından satırı siler)
         /// </summary>
         /// <param name="entity"></param>
-        void Update(T entity);
+        T Update(T entity);
         /// <summary>
         /// Verilen entity listesini toplu olarak ekler.
         /// </summary>

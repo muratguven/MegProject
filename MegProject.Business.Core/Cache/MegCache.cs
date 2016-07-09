@@ -19,6 +19,8 @@ namespace MegProject.Business.Core.Cache
             get { return this._duration; }             
         }
 
+
+
         
     }
   

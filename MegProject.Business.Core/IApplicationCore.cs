@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using log4net;
+using MegProject.Data.Core;
 
 namespace MegProject.Business.Core
 {
     public interface IApplicationCore
     {
-        /// <summary>
-        /// AutoMapper Create Map:
-        /// </summary>
-        IMapper Mapper { get;}
+        
     }
 }
