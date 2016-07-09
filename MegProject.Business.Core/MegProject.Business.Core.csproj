@@ -95,6 +95,7 @@
     <Compile Include="Cache\CacheKey.cs" />
     <Compile Include="Cache\CacheProvider.cs" />
     <Compile Include="Cache\DefaultCacheProvider.cs" />
+    <Compile Include="Cache\MegCache.cs" />
     <Compile Include="ControllerActionAppService\ControllerActionApp.cs" />
     <Compile Include="ControllerActionAppService\IControllerActionApp.cs" />
     <Compile Include="IApplicationCore.cs" />
