@@ -1,3 +1,6 @@
+using System.Data.Entity.Core.Common;
+using EFCache;
+
 namespace MegProject.Data.Migrations
 {
     using System;
@@ -11,6 +14,9 @@ namespace MegProject.Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+
+      
+
         }
 
         protected override void Seed(MegProject.Data.Models.Context.MegDbContext context)
