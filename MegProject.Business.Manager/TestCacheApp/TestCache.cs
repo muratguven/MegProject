@@ -15,20 +15,21 @@ namespace MegProject.Business.Manager.TestCacheApp
         [Inject]
         public IUnitOfWork _unitOfWork { private get; set; }
 
-        [MegCache(duration:60)]
+        [MegCache(key:"Users",duration:60)]
         public List<IdentityUser> GetAllUser()
         {
             List<IdentityUser> userList = null;
-            CacheKey key = CacheKey.New("Users");
-            CacheProvider.Instance = new DefaultCacheProvider();
-            if (CacheProvider.Instance.IsExist(key))
+            MegCacheManager cacheManager = new MegCacheManager();
+            var test= cacheManager.GetCache();
+            
+            if (test != null)
             {
-                userList = CacheProvider.Instance.Get(key) as List<IdentityUser>;
+                userList = test as List<IdentityUser>;
             }
             else
             {
-                userList = _unitOfWork.GetRepository<IdentityUser>().GetAll().ToList();
-                CacheProvider.Instance.Set(key,userList);
+                userList = _unitOfWork.GetRepository<IdentityUser>().GetAll().ToList();               
+                cacheManager.SetCache(userList);
             }
             
             return userList;

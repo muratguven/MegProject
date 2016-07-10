@@ -7,16 +7,23 @@ namespace MegProject.Business.Core.Cache
     {
        
         private readonly int _duration;
+        private readonly string _key;
 
         // This is a positional argument
-        public MegCache(int duration)
+        public MegCache(string key,int duration)
         {
-            this._duration = duration;            
+            this._duration = duration;
+            this._key = key;
         }
 
         public int Duration
         {
             get { return this._duration; }             
+        }
+
+        public string Key
+        {
+            get { return _key; }
         }
 
 
