@@ -1,3 +1,6 @@
+
+using MegProject.Business.Manager.TestCacheApp;
+using MegProject.Data.Core;
 using MegProject.Data.Repositories;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegProject.Business.Manager.App_Start.NinjectWebCommon), "Start")]
@@ -63,7 +66,9 @@ namespace MegProject.Business.Manager.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ITest>().To<Test>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<ITestCache>().To<TestCache>();
+
         }        
     }
 }

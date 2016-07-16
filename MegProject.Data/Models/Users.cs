@@ -8,8 +8,6 @@ namespace MegProject.Data.Models
 {
     public class Users:IdentityUser
     {
-        //[Key]
-        //public string Id { get; set; }
-       // public virtual ICollection<UserRoles> UserRoles { get; set; } 
+
     }
 }
