@@ -8,5 +8,6 @@ namespace MegProject.Business.Manager.TestCacheApp
     public interface ITestCache:IApplicationCore
     {
         List<IdentityUser> GetAllUser();
+        List<IdentityUser> GetUserByEmail(string email);
     }
 }

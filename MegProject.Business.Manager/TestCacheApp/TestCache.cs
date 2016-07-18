@@ -12,15 +12,16 @@ namespace MegProject.Business.Manager.TestCacheApp
 {
     public class TestCache:ApplicationCore,ITestCache
     {
+        //TODO:Cache kullanım yapısı düzeltilecek.
         [Inject]
         public IUnitOfWork _unitOfWork { private get; set; }
 
-        [MegCache(key:"Users",duration:60)]
+        
         public List<IdentityUser> GetAllUser()
         {
             List<IdentityUser> userList = null;
-            MegCacheManager cacheManager = new MegCacheManager();
-            var test= cacheManager.GetCache();
+            
+            var test= MegCacheManager<IdentityUser>.GetCache();
             
             if (test != null)
             {
@@ -28,12 +29,31 @@ namespace MegProject.Business.Manager.TestCacheApp
             }
             else
             {
-                userList = _unitOfWork.GetRepository<IdentityUser>().GetAll().ToList();               
-                cacheManager.SetCache(userList);
+                userList = _unitOfWork.GetRepository<IdentityUser>().GetAll().ToList();
+                MegCacheManager<IdentityUser>.SetCache(userList,120);
             }
             
             return userList;
 
         }
+
+        public List<IdentityUser> GetUserByEmail(string email)
+        {
+            List<IdentityUser> userList = null;
+            var test = MegCacheManager<IdentityUser>.GetCache();
+            if (test != null)
+            {
+                userList = ((List<IdentityUser>) test).Where(x => x.Email == email).ToList();
+                
+            }
+            if(userList==null)
+            {
+                userList = _unitOfWork.GetRepository<IdentityUser>().GetAll().ToList();
+                MegCacheManager<IdentityUser>.SetCache(userList);
+            }
+
+            return userList;
+        } 
+
     }
 }

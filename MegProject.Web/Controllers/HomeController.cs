@@ -18,7 +18,8 @@ namespace MegProject.Web.Controllers
 
         public ActionResult Index()
         {
-           var user=  _testCache.GetAllUser();
+            var user = _testCache.GetAllUser();
+            var userEmail = _testCache.GetUserByEmail("muratguven_ktu@hotmail.com");
             return View();
         }
 
