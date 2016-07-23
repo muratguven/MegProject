@@ -1,14 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
 
-namespace MegProject.Business.Core.Cache
+namespace MegProject.Data.Core.Cache
 {
-    public static class MegCacheManager<TCacheEntityKey> where TCacheEntityKey : class
+    public class MegCacheManager<TCacheEntityKey> where TCacheEntityKey:class 
     {
-
-        
         public static object GetCache()
         {
 
@@ -18,7 +13,7 @@ namespace MegProject.Business.Core.Cache
             CacheProvider.Instance = new DefaultCacheProvider();
 
             #region Get Cache Process
-            
+
             if (CacheProvider.Instance.IsExist(key))
             {
 
@@ -32,7 +27,7 @@ namespace MegProject.Business.Core.Cache
         }
 
 
-        public static void SetCache(object value, int? cacheDuration=0)
+        public static void SetCache(object value, int? cacheDuration = 0)
         {
 
             Type keyType = typeof(TCacheEntityKey);
@@ -43,8 +38,7 @@ namespace MegProject.Business.Core.Cache
             }
             CacheProvider.Instance = new DefaultCacheProvider();
             CacheProvider.Instance.Set(key, value);
-            
-        }
 
+        }
     }
 }

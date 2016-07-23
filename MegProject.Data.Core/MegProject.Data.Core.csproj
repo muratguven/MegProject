@@ -65,6 +65,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,6 +77,10 @@
   <ItemGroup>
     <Compile Include="Base\GenericRepository.cs" />
     <Compile Include="Base\IGenericRepository.cs" />
+    <Compile Include="Cache\CacheKey.cs" />
+    <Compile Include="Cache\CacheProvider.cs" />
+    <Compile Include="Cache\DefaultCacheProvider.cs" />
+    <Compile Include="Cache\MegCacheManager.cs" />
     <Compile Include="IdentityBase\ApplicationUser.cs" />
     <Compile Include="ModelBase\EntityBase.cs" />
     <Compile Include="ModelBase\IEntityBase.cs" />

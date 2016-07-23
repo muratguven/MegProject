@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MegProject.Business.Core;
-using MegProject.Business.Core.Cache;
 using MegProject.Data.Core;
+using MegProject.Data.Core.Cache;
 using MegProject.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.Provider;

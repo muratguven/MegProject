@@ -1,9 +1,9 @@
-﻿namespace MegProject.Business.Core.Cache
+﻿namespace MegProject.Data.Cache
 {
     public class CacheKey
     {
         private readonly string _generatedKey;
-        
+
 
         public CacheKey(string key)
         {

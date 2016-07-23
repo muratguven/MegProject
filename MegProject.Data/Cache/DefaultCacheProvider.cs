@@ -1,14 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Caching;
 
-namespace MegProject.Business.Core.Cache
+namespace MegProject.Data.Cache
 {
     public class DefaultCacheProvider:CacheProvider
     {
-
         private ObjectCache _cache = null;
         private CacheItemPolicy _policy = null;
         public DefaultCacheProvider()
@@ -28,7 +26,7 @@ namespace MegProject.Business.Core.Cache
             Trace.WriteLine("Value : " + arguments.CacheItem.Value.ToString());
             Trace.WriteLine("RemovedReason : " + arguments.RemovedReason);
             Trace.WriteLine("-------------------------------------");
-        } 
+        }
 
         public override object Get(CacheKey key)
         {
@@ -41,9 +39,9 @@ namespace MegProject.Business.Core.Cache
             {
                 Trace.WriteLine("Hata : CacheProvider.Get()\n" + e.Message);
                 throw new Exception("Cache Get sırasında bir hata oluştu!", e);
-                
+
             }
-            return retVal;            
+            return retVal;
         }
 
         public override void Set(CacheKey key, object value)
@@ -59,7 +57,7 @@ namespace MegProject.Business.Core.Cache
                 throw new Exception("Cache Set sırasında bir hata oluştu!", e);
             }
 
-            
+
         }
 
         public override bool IsExist(CacheKey key)
