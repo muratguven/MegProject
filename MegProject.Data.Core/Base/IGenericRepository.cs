@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MegProject.Data.Core.Base
 {
-    public interface IGenericRepository<T> : IDisposable where T : class
+    public interface IGenericRepository<T> where T : class
     {
         /// <summary>
         /// Context bilgisi
@@ -118,6 +118,28 @@ namespace MegProject.Data.Core.Base
         /// </summary>
         /// <returns></returns>
         Task<IQueryable<T>> GetAllAsync();
+
+        #region Caching Commands 
+        /// <summary>
+        /// Cache kullanarak Bütün Entity Listesini Getirir.
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<T> GetAllWithCache();
+        /// <summary>
+        /// Verilen şarta göre Cache kullanılarak Entity Listesini Getirir.
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<T> FindListWithCache(Expression<Func<T, bool>> where);
+        /// <summary>
+        /// Verilen şarta göre Cache kullanılarak bir entity setini getirir.
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        T FindWithCache(Expression<Func<T, bool>> where);
+
+        #endregion
+
+
 
 
     }

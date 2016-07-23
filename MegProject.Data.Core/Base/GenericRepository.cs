@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -12,7 +13,7 @@ namespace MegProject.Data.Core.Base
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private bool disposed = false;
+        
 
 
         public DbContext Context { get; set; }
@@ -138,6 +139,23 @@ namespace MegProject.Data.Core.Base
             return ObjectDbset.ToList().AsQueryable();
         }
 
+        #region  Caching
+        public IQueryable<T> GetAllWithCache()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> FindListWithCache(Expression<Func<T, bool>> @where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T FindWithCache(Expression<Func<T, bool>> @where)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
 
 
         #region Data Table 
@@ -254,26 +272,7 @@ namespace MegProject.Data.Core.Base
             return ObjectDbset.Any(where);
         }
 
-        #region Disposing
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    Context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        
 
 
 
