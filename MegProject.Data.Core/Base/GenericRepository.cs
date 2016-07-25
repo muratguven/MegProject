@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Transactions;
 using EntityFramework.BulkInsert.Extensions;
+using MegProject.Data.Core.Cache;
 
 namespace MegProject.Data.Core.Base
 {
@@ -139,24 +140,21 @@ namespace MegProject.Data.Core.Base
             return ObjectDbset.ToList().AsQueryable();
         }
 
-        #region  Caching
-        public IQueryable<T> GetAllWithCache()
+        public IQueryable<T> AsCached(string key, int? cacheDuration)
         {
-            throw new NotImplementedException();
+            if (!String.IsNullOrEmpty(key))
+            {
+                var cacheValues = MegCacheManager.GetCache(key);
+                if (cacheValues != null)
+                {
+                    return cacheValues as IQueryable<T>;
+                }
+
+                MegCacheManager.SetCache(key,ObjectDbset,cacheDuration);
+                
+            }
+            return ObjectDbset;
         }
-
-        public IQueryable<T> FindListWithCache(Expression<Func<T, bool>> @where)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T FindWithCache(Expression<Func<T, bool>> @where)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
-
-
 
         #region Data Table 
 

@@ -1,24 +1,22 @@
 ﻿using System;
+using System.Runtime.Caching.Configuration;
 
 namespace MegProject.Data.Core.Cache
 {
-    public class MegCacheManager<TCacheEntityKey> where TCacheEntityKey:class 
+    public static  class MegCacheManager 
     {
-        public static object GetCache()
+        public static object GetCache(string key)
         {
-
-
-            Type keyType = typeof(TCacheEntityKey);
-            CacheKey key = CacheKey.New(keyType.Name);
+            
+            CacheKey cacheKey = CacheKey.New(key);
+            
             CacheProvider.Instance = new DefaultCacheProvider();
-
+           
             #region Get Cache Process
 
-            if (CacheProvider.Instance.IsExist(key))
+            if (CacheProvider.Instance.IsExist(cacheKey))
             {
-
-                return CacheProvider.Instance.Get(key);
-
+                return CacheProvider.Instance.Get(cacheKey);
             }
             #endregion
 
@@ -27,18 +25,25 @@ namespace MegProject.Data.Core.Cache
         }
 
 
-        public static void SetCache(object value, int? cacheDuration = 0)
+        public static void SetCache(string key, object value, int? cacheDuration = 0)
         {
-
-            Type keyType = typeof(TCacheEntityKey);
-            CacheKey key = CacheKey.New(keyType.Name);
+            
+            CacheKey cacheKey = CacheKey.New(key);
             if (cacheDuration != default(int) && cacheDuration != null)
             {
                 CacheProvider.CacheDuration = (int)cacheDuration;
             }
             CacheProvider.Instance = new DefaultCacheProvider();
-            CacheProvider.Instance.Set(key, value);
+            if (CacheProvider.Instance.IsExist(cacheKey))
+            {
+                CacheProvider.Instance.Remove(cacheKey);
+            }
+            CacheProvider.Instance.Set(cacheKey, value);
 
         }
+
+       
+
+
     }
 }

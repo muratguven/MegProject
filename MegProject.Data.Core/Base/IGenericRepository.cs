@@ -115,29 +115,15 @@ namespace MegProject.Data.Core.Base
         bool IsInDb(System.Linq.Expressions.Expression<Func<T, bool>> where);
         /// <summary>
         /// Asenkron Tüm dataları getirmeye yarar.
-        /// </summary>
+        /// </summary>7017581268
         /// <returns></returns>
         Task<IQueryable<T>> GetAllAsync();
-
-        #region Caching Commands 
         /// <summary>
-        /// Cache kullanarak Bütün Entity Listesini Getirir.
+        /// Caching işlemini yapar yada key göre datayı Cache'den okur.
         /// </summary>
+        /// <param name="key"></param>
         /// <returns></returns>
-        IQueryable<T> GetAllWithCache();
-        /// <summary>
-        /// Verilen şarta göre Cache kullanılarak Entity Listesini Getirir.
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<T> FindListWithCache(Expression<Func<T, bool>> where);
-        /// <summary>
-        /// Verilen şarta göre Cache kullanılarak bir entity setini getirir.
-        /// </summary>
-        /// <param name="where"></param>
-        /// <returns></returns>
-        T FindWithCache(Expression<Func<T, bool>> where);
-
-        #endregion
+        IQueryable<T> AsCached(string key, int? cacheDuration);
 
 
 
