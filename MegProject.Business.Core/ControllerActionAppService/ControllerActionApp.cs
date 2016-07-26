@@ -18,20 +18,12 @@ namespace MegProject.Business.Core.ControllerActionAppService
       
         [Inject]
         public IUnitOfWork _unitofwork { private get; set; }
-        [Inject] 
-        public IGenericRepository<SystemControllers> _systemControllerRepository { private get; set; }
-        [Inject]
-        public IGenericRepository<SystemActions> _systemActionRepository { private get; set; }
-        [Inject]
-        public IGenericRepository<PermissionDetails> _permissionDetailsRepository { private get; set; }
-
+        
 
         public ControllerActionApp()
         {
             _unitofwork = new UnitOfWork();
-            _systemControllerRepository = _unitofwork.GetRepository<SystemControllers>();
-            _systemActionRepository = _unitofwork.GetRepository<SystemActions>();
-            _permissionDetailsRepository = _unitofwork.GetRepository<PermissionDetails>();
+
         }
 
 
@@ -47,8 +39,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
             if (controller != null && controller.Name!="ErrorController")
             {
-
-                var controllerEntity = Mapper.Map<SystemControllers>(controller);
+                
                 List<SystemActions> actionEntity = new List<SystemActions>();
 
                 int controllerId = FindController(controller.Name); // Veri tabanında sorgu!
@@ -56,19 +47,20 @@ namespace MegProject.Business.Core.ControllerActionAppService
                 if (controllerId == 0)  // Veri Tabanında Yoksa Ekleme işlemi
                 {
                     // Add System Controller
-                    controllerEntity.Status = 0;
-                    controllerEntity.CreateDate = DateTime.Now;
-                    _systemControllerRepository.Add(controllerEntity);
-                    _systemControllerRepository.Save();
-
+                    controller.Status = 0;
+                    controller.CreateDate = DateTime.Now;
+                    controller.Channel = System.Configuration.ConfigurationManager.AppSettings["Channel"];
+                    _unitofwork.GetRepository<SystemControllers>().Add(controller);
+                    _unitofwork.Commit();
+                    
                     //Add System Actions
-                    controllerId = controllerEntity.Id;
+                    controllerId = controller.Id;
                 }
                 foreach (var item in actionList)
                 {
 
                     var addAction =
-                        _systemActionRepository.Find(x => x.Name == item.Name && x.ControllerId == controllerId);
+                        _unitofwork.GetRepository<SystemActions>().Find(x => x.Name == item.Name && x.ControllerId == controllerId);
 
                     if (addAction==null)
                     {
@@ -87,7 +79,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
                 if (actionList.Count > 0)
                 {
-                    _systemActionRepository.SaveAll(actionEntity);
+                    _unitofwork.GetRepository<SystemActions>().SaveAll(actionEntity);
                 }
 
 
@@ -112,8 +104,8 @@ namespace MegProject.Business.Core.ControllerActionAppService
         public int FindController(string Name)
         {
             if (!String.IsNullOrEmpty(Name))
-            {
-                var controller = _systemControllerRepository.Find(x => x.Name == Name);
+            {                
+                var controller = _unitofwork.GetRepository<SystemControllers>().Find(x => x.Name == Name);
                 if (controller != null)
                 {
                     return controller.Id;
@@ -135,8 +127,8 @@ namespace MegProject.Business.Core.ControllerActionAppService
         /// </summary>
         /// <returns></returns>
         public List<Data.Models.SystemControllers> GetAllControllers()
-        {
-            var result = _systemControllerRepository.GetAll();
+        {            
+            var result = _unitofwork.GetRepository<SystemControllers>().GetAll();
             return result.ToList();
         }
 
@@ -144,8 +136,8 @@ namespace MegProject.Business.Core.ControllerActionAppService
         public int FindAction(string Name)
         {
             if (!String.IsNullOrEmpty(Name))
-            {
-                return _systemActionRepository.Find(x => x.Name == Name).Id;
+            {                
+                return _unitofwork.GetRepository<SystemActions>().Find(x => x.Name == Name).Id;
             }
             else
             {
@@ -157,34 +149,32 @@ namespace MegProject.Business.Core.ControllerActionAppService
         public void ClearControllerActions(Data.Models.SystemControllers newControllers, List<Data.Models.SystemActions> newActions)
         {
             // First Step Is controller in DB 
-            
-            
-            var dbController = _systemControllerRepository.Find(x => x.Name.Contains(newControllers.Name));
-            
-            var entityAction = Mapper.Map<List<Data.Models.SystemActions>>(newActions);
 
+            
+            var dbController = _unitofwork.GetRepository<SystemControllers>().Find(x => x.Name.Contains(newControllers.Name));            
             if (dbController != null)
             {
-                var deletedActions = _systemActionRepository.FindList(x => x.ControllerId == dbController.Id).Select(n => n.Name).Except(entityAction.Select(e => e.Name));
+
+                var deletedActions = _unitofwork.GetRepository<SystemActions>().FindList(x => x.ControllerId == dbController.Id).Select(n => n.Name).Except(newActions.Select(e => e.Name));
 
                 foreach (var deleteItem in deletedActions)
                 {
 
                     var action =
-                        _systemActionRepository.Find(x => x.ControllerId == dbController.Id && x.Name == deleteItem);
+                        _unitofwork.GetRepository<SystemActions>().Find(x => x.ControllerId == dbController.Id && x.Name == deleteItem);
 
                     // Delete RoleAction Table
-                    var roleActions = _permissionDetailsRepository.FindList(x => x.ActionId == action.Id);
+                    var roleActions = _unitofwork.GetRepository<PermissionDetails>().FindList(x => x.ActionId == action.Id);
                     foreach (var roleactionItem in roleActions)
                     {
-                        _permissionDetailsRepository.Delete(roleactionItem.Id);
-                        _permissionDetailsRepository.Save();
+                        _unitofwork.GetRepository<PermissionDetails>().Delete(roleactionItem.Id);
+                        _unitofwork.Commit();
                     }
 
 
                     // Delete Action Table
-                    _systemActionRepository.Delete(action.Id);
-                    _systemActionRepository.Save();
+                    _unitofwork.GetRepository<SystemActions>().Delete(action.Id);
+                    _unitofwork.Commit();
 
 
                 }
@@ -194,11 +184,10 @@ namespace MegProject.Business.Core.ControllerActionAppService
             
         }
 
-
-
+        
         public List<Data.Models.PermissionDetails> GetSelectedPermissionDetails(int? permissonId)
         {
-            var result = _permissionDetailsRepository.FindList(x => x.PermissionId == permissonId);
+            var result = _unitofwork.GetRepository<PermissionDetails>().FindList(x => x.PermissionId == permissonId);
             return result.ToList();
         }
     }
