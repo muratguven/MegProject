@@ -17,16 +17,7 @@ namespace MegProject.Web.Auth
            _roleApp= new RoleApp();
             _megIdentity = megIdentity;
         }
-
         
-        //public int Id { get; set; }
-
-        //public string Email { get; set; }
-     
-
-        //public string UserName { get; set; }
-
-
         public IIdentity Identity
         {
             get { return _megIdentity; }

@@ -7,16 +7,16 @@ using System.Web;
 using System.Web.Mvc;
 using MegProject.Business.Manager.IdentityAppService;
 using MegProject.Data.Core.IdentityBase;
+using MegProject.Dto.ViewModels.AccountViewModels;
 using MegProject.Web.Base;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MegProject.Web.Models;
 
 namespace MegProject.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

@@ -62,7 +62,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
                     var addAction =
                         _unitofwork.GetRepository<SystemActions>().Find(x => x.Name == item.Name && x.ControllerId == controllerId);
 
-                    if (addAction==null)
+                    if (addAction == null)
                     {
                         SystemActions temp = new SystemActions()
                         {
@@ -79,7 +79,7 @@ namespace MegProject.Business.Core.ControllerActionAppService
 
                 if (actionList.Count > 0)
                 {
-                    _unitofwork.GetRepository<SystemActions>().SaveAll(actionEntity);
+                    _unitofwork.GetRepository<SystemActions>().BulkInsert(actionEntity); 
                 }
 
 

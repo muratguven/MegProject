@@ -16,8 +16,9 @@ namespace MegProject.Business.Manager.TestCacheApp
         
         public List<IdentityUser> GetAllUser()
         {
+
             List<IdentityUser> userList = null;            
-            userList = _unitOfWork.GetRepository<IdentityUser>().AsCached("userlist", 60).ToList();            
+            userList = _unitOfWork.GetRepository<IdentityUser>().AsCached("userlist", 60).ToList();                   
             return userList;
         }
 

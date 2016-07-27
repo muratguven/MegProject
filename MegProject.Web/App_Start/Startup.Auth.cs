@@ -8,7 +8,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using MegProject.Web.Models;
+
 
 
 namespace MegProject.Web
@@ -62,11 +62,11 @@ namespace MegProject.Web
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "742501055929-o78p9627353kgr19ogjfah037aur7bkd.apps.googleusercontent.com",
+                ClientSecret = "wipA_eVbuPagsy-0dRtE8Rwl"
+            });
         }
     }
 }

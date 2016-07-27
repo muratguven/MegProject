@@ -14,7 +14,7 @@ namespace MegProject.Data.Core.Base
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        
+
 
 
         public DbContext Context { get; set; }
@@ -150,8 +150,8 @@ namespace MegProject.Data.Core.Base
                     return cacheValues as IQueryable<T>;
                 }
 
-                MegCacheManager.SetCache(key,ObjectDbset,cacheDuration);
-                
+                MegCacheManager.SetCache(key, ObjectDbset, cacheDuration);
+
             }
             return ObjectDbset;
         }
@@ -214,22 +214,22 @@ namespace MegProject.Data.Core.Base
         // Save All
         public int Save()
         {
-            //using (var transaction = Context.Database.BeginTransaction())
-            //{
-            //try
-            //{
-            int result = Context.SaveChanges();
-            //transaction.Commit();
-            return result;
-            //}
-            //catch (Exception)
-            //{
-            //    transaction.Rollback();
-            //    return 0;
-            //}
+            using (var transaction = Context.Database.BeginTransaction())
+            {
+                try
+                {
+                    int result = Context.SaveChanges();
+                    transaction.Commit();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return 0;
+                }
 
 
-            //}
+            }
 
         }
 
@@ -270,7 +270,7 @@ namespace MegProject.Data.Core.Base
             return ObjectDbset.Any(where);
         }
 
-        
+
 
 
 

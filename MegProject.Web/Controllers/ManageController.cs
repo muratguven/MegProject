@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MegProject.Business.Manager.IdentityAppService;
+using MegProject.Dto.ViewModels.AccountViewModels;
 using MegProject.Web.Base;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MegProject.Web.Models;
 
 namespace MegProject.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -66,7 +66,7 @@ namespace MegProject.Web.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            var model = new Dto.ViewModels.AccountViewModels.IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),

@@ -45,14 +45,27 @@ namespace MegProject.Data.Core
         
         public Data.Core.Base.IGenericRepository<T> GetRepository<T>() where T : class
         {
-            return new Data.Core.Base.GenericRepository<T>(_dbContext);
+            return new Data.Core.Base.GenericRepository<T>(Context);
         }
 
         public int Commit()
         {
+            
             using (var tcx = _dbContext.Database.BeginTransaction())
             {
-               return  _dbContext.SaveChanges();
+                try
+                {
+                    int result = 0;
+                    result = _dbContext.SaveChanges();
+                    tcx.Commit();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    tcx.Rollback();
+                    return 0;
+                }
+            
             }
         }
 
