@@ -2,8 +2,8 @@
 
 namespace MegProject.Data.Models
 {
-    public class UserClaim:IdentityUserClaim
+    public class UserClaim : IdentityUserClaim
     {
-         
+
     }
 }

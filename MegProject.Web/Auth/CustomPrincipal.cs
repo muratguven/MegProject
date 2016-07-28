@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Principal;
-using MegProject.Business.Manager.RoleAppService;
+//using MegProject.Business.Manager.RoleAppService;
 
 
 namespace MegProject.Web.Auth
@@ -9,12 +9,12 @@ namespace MegProject.Web.Auth
     public  class CustomPrincipal:ICustomPrincipal
     {
 
-        private readonly IRoleApp _roleApp;
+        //private readonly IRoleApp _roleApp;
         private readonly MegIdentity _megIdentity;
 
         public CustomPrincipal(MegIdentity megIdentity)
         {
-           _roleApp= new RoleApp();
+           //_roleApp= new RoleApp();
             _megIdentity = megIdentity;
         }
         

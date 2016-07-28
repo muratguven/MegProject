@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MegProject.Business.Manager.TestCacheApp;
-using MegProject.Business.Manager.UserAppService;
 using MegProject.Web.Base;
 using Ninject;
 

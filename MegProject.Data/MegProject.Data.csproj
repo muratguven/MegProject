@@ -91,6 +91,7 @@
     <Compile Include="Core\DbConfiguration.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
+    <Compile Include="IdentityBase\ApplicationUser.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context\MegDbContext.cs" />
     <Compile Include="Models\Permission.cs" />

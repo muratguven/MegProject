@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using MegProject.Data.Core.IdentityBase;
+using MegProject.Data.IdentityBase;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MegProject.Data.Models.Context
@@ -55,6 +55,8 @@ namespace MegProject.Data.Models.Context
 
         public DbSet<PermissionDetails> PermissionDetails { get; set; }
         public DbSet<Roles> Roles { get; set; }
+
+        public DbSet<UserClaim> UserClaims { get; set; }
         #endregion
 
 

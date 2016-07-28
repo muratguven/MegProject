@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MegProject.Business.Manager.IdentityAppService;
-using MegProject.Data.Core.IdentityBase;
+using MegProject.Data.IdentityBase;
 using MegProject.Dto.ViewModels.AccountViewModels;
 using MegProject.Web.Base;
 using Microsoft.AspNet.Identity;

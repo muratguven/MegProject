@@ -1,5 +1,5 @@
 ﻿using System;
-using MegProject.Data.Core.IdentityBase;
+using MegProject.Data.IdentityBase;
 using MegProject.Data.Models.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

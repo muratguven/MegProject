@@ -81,7 +81,6 @@
     <Compile Include="Cache\CacheProvider.cs" />
     <Compile Include="Cache\DefaultCacheProvider.cs" />
     <Compile Include="Cache\MegCacheManager.cs" />
-    <Compile Include="IdentityBase\ApplicationUser.cs" />
     <Compile Include="ModelBase\EntityBase.cs" />
     <Compile Include="ModelBase\IEntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

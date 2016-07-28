@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MegProject.Business.Manager.RoleAppService;
-using MegProject.Business.Manager.UserAppService;
+//using MegProject.Business.Manager.RoleAppService;
+//using MegProject.Business.Manager.UserAppService;
 using MegProject.Dto;
 using MegProject.Dto.CustomDto.ComponentModels;
 using MegProject.Dto.CustomDto.ViewModels;
@@ -17,15 +17,15 @@ namespace MegProject.Web.Controllers
     {
 
         
-        private readonly IUserApp _userApp;
-        private readonly IRoleApp _roleApp;
+        //private readonly IUserApp _userApp;
+        //private readonly IRoleApp _roleApp;
 
-        public UserController(IUserApp userApp, IRoleApp roleApp)
-        {
+        //public UserController(IUserApp userApp, IRoleApp roleApp)
+        //{
             
-            _userApp = userApp;
-            _roleApp = roleApp;
-        }
+        //    _userApp = userApp;
+        //    _roleApp = roleApp;
+        //}
 
         //#region ActionResult Methods
 

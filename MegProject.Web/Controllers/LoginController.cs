@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using MegProject.Business.Manager.UserAppService;
+//using MegProject.Business.Manager.UserAppService;
 using MegProject.Dto.CustomDto.ViewModels;
 using MegProject.Web.Auth;
 using MegProject.Web.Base;
