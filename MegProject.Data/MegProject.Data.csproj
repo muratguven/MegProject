@@ -100,6 +100,7 @@
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\SystemActions.cs" />
     <Compile Include="Models\SystemControllers.cs" />
+    <Compile Include="Models\SystemUsers.cs" />
     <Compile Include="Models\UserClaim.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserRoles.cs" />

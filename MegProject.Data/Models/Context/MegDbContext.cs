@@ -57,6 +57,8 @@ namespace MegProject.Data.Models.Context
         public DbSet<Roles> Roles { get; set; }
 
         public DbSet<UserClaim> UserClaims { get; set; }
+
+        public DbSet<SystemUsers> SystemUsers { get; set; } 
         #endregion
 
 

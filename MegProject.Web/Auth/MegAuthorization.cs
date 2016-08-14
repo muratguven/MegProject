@@ -36,9 +36,7 @@ namespace MegProject.Web.Auth
                 //    UrlHelper urlHelper = new UrlHelper(filterContext.RequestContext);
                 //    filterContext.Result = new RedirectResult(urlHelper.Action("NotPermission", "Error"));
                 //}
-
-
-
+                
             }
             else
             {

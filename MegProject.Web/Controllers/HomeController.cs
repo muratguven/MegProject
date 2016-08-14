@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MegProject.Business.Manager.TestCacheApp;
+using MegProject.Data.Models;
+using MegProject.Web.Auth;
 using MegProject.Web.Base;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Ninject;
 
 namespace MegProject.Web.Controllers
 {
+    [MegAuthorization]
     public class HomeController : BaseController
     {
 
@@ -19,6 +23,7 @@ namespace MegProject.Web.Controllers
         {
             var user = _testCache.GetAllUser();
             var userEmail = _testCache.GetUserByEmail("muratguven_ktu@hotmail.com");
+            var users = _testCache.GetAll<IdentityUser>();
             return View();
         }
 
