@@ -47,14 +47,14 @@ namespace MegProject.Data.Models.Context
 
         public DbSet<SystemActions> SystemActions { get; set; }
 
-        public DbSet<Users> Users { get; set; }
+        public new DbSet<Users> Users { get; set; }
 
         public DbSet<UserRoles> UserRoles { get; set; }
 
         public DbSet<Permission> Permission { get; set; }
 
         public DbSet<PermissionDetails> PermissionDetails { get; set; }
-        public DbSet<Roles> Roles { get; set; }
+        public new DbSet<Roles> Roles { get; set; }
 
         public DbSet<UserClaim> UserClaims { get; set; }
 

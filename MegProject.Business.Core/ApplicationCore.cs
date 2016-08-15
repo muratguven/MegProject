@@ -10,12 +10,12 @@ using Ninject;
 
 namespace MegProject.Business.Core
 {
-    public abstract class ApplicationCore:IApplicationCore
+    public abstract class ApplicationCore : IApplicationCore
     {
 
         private IUnitOfWork _unitOfWork;
 
-        
+
         protected ILog log
         {
             get
@@ -42,27 +42,62 @@ namespace MegProject.Business.Core
             _unitOfWork = new UnitOfWork();
             var result = _unitOfWork.GetRepository<T>().FindList(where);
             return result.ToList();
+
         }
 
-        public List<T> GetAll<T>() where T:class
+        public List<T> GetAll<T>() where T : class
         {
             _unitOfWork = new UnitOfWork();
             var result = _unitOfWork.GetRepository<T>().GetAll();
             return result.ToList();
+
         }
 
         public T Add<T>(T data) where T : class
         {
-            _unitOfWork = new UnitOfWork();
-            var result = _unitOfWork.GetRepository<T>().Add(data);
-            return result;
+            using (_unitOfWork = new UnitOfWork())
+            {
+                try
+                {
+                    var result = _unitOfWork.GetRepository<T>().Add(data);
+                    int commit = _unitOfWork.Commit();
+                    if (commit > 0)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.Fatal(e);
+
+                }
+
+                return null;
+            }
+
         }
 
         public T Update<T>(T data) where T : class
         {
-            _unitOfWork = new UnitOfWork();
-            var result = _unitOfWork.GetRepository<T>().Update(data);
-            return result;
+            using (_unitOfWork = new UnitOfWork())
+            {
+                try
+                {
+                    var result = _unitOfWork.GetRepository<T>().Update(data);
+                    int commit = _unitOfWork.Commit();
+                    if (commit > 0)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.Fatal(e);
+                }
+
+                return null;
+            }
+
         }
 
         #endregion

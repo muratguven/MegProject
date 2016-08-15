@@ -48,8 +48,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.MockingKernel, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MockingKernel.3.2.0.0\lib\net45-full\Ninject.MockingKernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.MockingKernel.Moq, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MockingKernel.Moq.3.2.2.0\lib\net45-full\Ninject.MockingKernel.Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -63,16 +75,43 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Controllers\UnitTest1.cs" />
+    <Compile Include="BusinessTests\PermissionAppTest.cs" />
+    <Compile Include="MegTestBase.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MegProject.Business.Core\MegProject.Business.Core.csproj">
+      <Project>{d4c36fe6-db7f-4b20-9922-f71600b3edb2}</Project>
+      <Name>MegProject.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Business.Manager\MegProject.Business.Manager.csproj">
+      <Project>{79d868b3-51e7-47ba-96b3-795aabfdf269}</Project>
+      <Name>MegProject.Business.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Common\MegProject.Common.csproj">
+      <Project>{3f8bc361-b768-4d4e-a110-f52766d6b228}</Project>
+      <Name>MegProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Data.Core\MegProject.Data.Core.csproj">
+      <Project>{2f0832d4-332d-45cd-84c7-31fc50cfeec1}</Project>
+      <Name>MegProject.Data.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Data\MegProject.Data.csproj">
+      <Project>{19c82d07-79dd-4838-99cf-e9f13ff29735}</Project>
+      <Name>MegProject.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MegProject.Dto\MegProject.Dto.csproj">
+      <Project>{426d5a6d-b1e7-476a-86fa-b597bdb7723d}</Project>
+      <Name>MegProject.Dto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MegProject.Web\MegProject.Web.csproj">
       <Project>{395D08C8-B772-4D2E-8DB2-F4D512081620}</Project>
       <Name>MegProject.Web</Name>
@@ -81,6 +120,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

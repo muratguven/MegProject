@@ -1,4 +1,5 @@
 
+using MegProject.Business.Manager.PermissionAppService;
 using MegProject.Business.Manager.TestCacheApp;
 using MegProject.Data.Core;
 using MegProject.Data.Repositories;
@@ -68,6 +69,7 @@ namespace MegProject.Business.Manager.App_Start
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<ITestCache>().To<TestCache>();
+            kernel.Bind<IPermissionApp>().To<PermissionApp>();
 
         }        
     }
