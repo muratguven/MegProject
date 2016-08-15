@@ -106,6 +106,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MegProject.Data.Core\MegProject.Data.Core.csproj">
+      <Project>{2f0832d4-332d-45cd-84c7-31fc50cfeec1}</Project>
+      <Name>MegProject.Data.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MegProject.Data\MegProject.Data.csproj">
       <Project>{19c82d07-79dd-4838-99cf-e9f13ff29735}</Project>
       <Name>MegProject.Data</Name>
