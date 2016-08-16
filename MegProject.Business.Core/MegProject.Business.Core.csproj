@@ -93,8 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCore.cs" />
-    <Compile Include="ControllerActionAppService\ControllerActionApp.cs" />
-    <Compile Include="ControllerActionAppService\IControllerActionApp.cs" />
     <Compile Include="IApplicationCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

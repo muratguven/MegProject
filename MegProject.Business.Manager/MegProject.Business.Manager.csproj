@@ -100,6 +100,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -115,6 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="ControllerActionAppService\ControllerActionApp.cs" />
+    <Compile Include="ControllerActionAppService\IControllerActionApp.cs" />
     <Compile Include="IdentityAppService\ApplicationSignInManager.cs" />
     <Compile Include="IdentityAppService\ApplicationUserManager.cs" />
     <Compile Include="IdentityAppService\EmailService.cs" />

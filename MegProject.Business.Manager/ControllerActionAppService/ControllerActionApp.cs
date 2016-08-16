@@ -11,7 +11,7 @@ using MegProject.Data.Repositories;
 using MegProject.Dto;
 using Ninject;
 
-namespace MegProject.Business.Core.ControllerActionAppService
+namespace MegProject.Business.Manager.ControllerActionAppService
 {
     public class ControllerActionApp:ApplicationCore,IControllerActionApp
     {

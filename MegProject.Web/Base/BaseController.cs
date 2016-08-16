@@ -4,7 +4,7 @@ using MegProject.Web.Auth;
 using System.Text;
 using AutoMapper;
 using MegProject.Business.Core;
-using MegProject.Business.Core.ControllerActionAppService;
+using MegProject.Business.Manager.ControllerActionAppService;
 
 
 namespace MegProject.Web.Base

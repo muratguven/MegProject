@@ -3,7 +3,7 @@ using MegProject.Business.Core;
 using MegProject.Data.Models;
 using MegProject.Dto;
 
-namespace MegProject.Business.Core.ControllerActionAppService
+namespace MegProject.Business.Manager.ControllerActionAppService
 {
     public interface IControllerActionApp:IApplicationCore
     {

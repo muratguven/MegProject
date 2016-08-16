@@ -9,7 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using MegProject.Business.Core.ControllerActionAppService;
+using MegProject.Business.Manager.ControllerActionAppService;
 using MegProject.Data.Models;
 using MegProject.Dto;
 using MegProject.Web.Auth;
@@ -63,7 +63,7 @@ namespace MegProject.Web
             .Select(x => new { Controller = x.DeclaringType.Name, Action = x.Name, ReturnType = x.ReturnType.Name, Attributes = String.Join(",", x.GetCustomAttributes().Select(a => a.GetType().Name.Replace("Attribute", ""))) })
             .OrderBy(x => x.Controller).ThenBy(x => x.Action).ToList();
 
-            MegProject.Business.Core.ControllerActionAppService.IControllerActionApp _controllerApp = new ControllerActionApp();
+            IControllerActionApp _controllerApp = new ControllerActionApp();
 
 
 
