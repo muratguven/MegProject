@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 
 namespace MegProject.Data.Core
@@ -9,5 +10,6 @@ namespace MegProject.Data.Core
         Data.Core.Base.IGenericRepository<T> GetRepository<T>() where T : class;
 
         int Commit();
+        Task<int> CommitAsync();
     }
 }

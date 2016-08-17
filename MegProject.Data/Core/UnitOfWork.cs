@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
+using System.Threading.Tasks;
 using System.Transactions;
 using MegProject.Data.Core.Base;
 using MegProject.Data.Models.Context;
@@ -68,6 +70,27 @@ namespace MegProject.Data.Core
             
             }
         }
+
+        public async Task<int> CommitAsync()
+        {
+            using (var tcx = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+
+                    var result = _dbContext.SaveChangesAsync();
+                    tcx.Commit();
+                    return await result;
+                }
+                catch (Exception)
+                {
+                    tcx.Rollback();
+                    return 0;
+                    
+                }
+            }
+        } 
+
 
         #region Disposing
 

@@ -97,48 +97,44 @@ namespace MegProject.Data.Core.Base
             return query.Skip(excludedRows).Take(pageSize);
         }
 
-        public async Task<T> AddAsync(T entity)
-        {
-            using (var scope = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    ObjectDbset.Add(entity);
-                    await Context.SaveChangesAsync();
-                    scope.Commit();
-                    return entity;
-                }
-                catch (Exception)
-                {
-                    scope.Rollback();
-                    return null;
-                }
+        //public async Task<T> AddAsync(T entity)
+        //{
+        //    using (var scope = Context.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            ObjectDbset.Add(entity);
+        //            await Context.SaveChangesAsync();
+        //            scope.Commit();
+        //            return entity;
+        //        }
+        //        catch (Exception)
+        //        {
+        //            scope.Rollback();
+        //            return null;
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
 
-        public async Task<T> UpdateAsync(T entity)
-        {
-            ObjectDbset.Attach(entity);
-            Context.Entry(entity).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
-            return entity;
-        }
+        //public async Task<T> UpdateAsync(T entity)
+        //{
+        //    ObjectDbset.Attach(entity);
+        //    Context.Entry(entity).State = EntityState.Modified;
+        //    await Context.SaveChangesAsync();
+        //    return entity;
+        //}
 
-        public async Task<bool> DeleteAsync(T entity)
-        {
-            ObjectDbset.Remove(entity);
-            Context.Entry(entity).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
-            return true;
-        }
+        //public async Task<bool> DeleteAsync(T entity)
+        //{
+        //    ObjectDbset.Remove(entity);
+        //    Context.Entry(entity).State = EntityState.Modified;
+        //    await Context.SaveChangesAsync();
+        //    return true;
+        //}
 
-
-        public async Task<IQueryable<T>> GetAllAsync()
-        {
-            return ObjectDbset.ToList().AsQueryable();
-        }
+        
 
         public IQueryable<T> AsCached(string key, int? cacheDuration)
         {

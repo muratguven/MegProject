@@ -94,30 +94,26 @@ namespace MegProject.Data.Core.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<T> AddAsync(T entity);
-        /// <summary>
-        /// Asenkron güncelleme işlemini yapar.
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        Task<T> UpdateAsync(T entity);
-        /// <summary>
-        /// Asenkron silme işlemi yapar.(Dikkat bu işlemler veri tabanından satırı siler)
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        Task<bool> DeleteAsync(T entity);
+        //Task<T> AddAsync(T entity);
+        ///// <summary>
+        ///// Asenkron güncelleme işlemini yapar.
+        ///// </summary>
+        ///// <param name="entity"></param>
+        ///// <returns></returns>
+        //Task<T> UpdateAsync(T entity);
+        ///// <summary>
+        ///// Asenkron silme işlemi yapar.(Dikkat bu işlemler veri tabanından satırı siler)
+        ///// </summary>
+        ///// <param name="entity"></param>
+        ///// <returns></returns>
+        //Task<bool> DeleteAsync(T entity);
         /// <summary>
         /// Verilen şarta göre entity veri tabanında var mı sorgusunu yapar.
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         bool IsInDb(System.Linq.Expressions.Expression<Func<T, bool>> where);
-        /// <summary>
-        /// Asenkron Tüm dataları getirmeye yarar.
-        /// </summary>7017581268
-        /// <returns></returns>
-        Task<IQueryable<T>> GetAllAsync();
+        
         /// <summary>
         /// Caching işlemini yapar yada key göre datayı Cache'den okur.
         /// </summary>
